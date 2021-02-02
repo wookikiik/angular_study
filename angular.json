@@ -234,6 +234,122 @@
           }
         }
       }
+    },
+    "doo": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/doo",
+      "sourceRoot": "projects/doo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/doo",
+            "index": "projects/doo/src/index.html",
+            "main": "projects/doo/src/main.ts",
+            "polyfills": "projects/doo/src/polyfills.ts",
+            "tsConfig": "projects/doo/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/doo/src/favicon.ico",
+              "projects/doo/src/assets"
+            ],
+            "styles": [
+              "projects/doo/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/doo/src/environments/environment.ts",
+                  "with": "projects/doo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "doo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "doo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "doo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/doo/src/test.ts",
+            "polyfills": "projects/doo/src/polyfills.ts",
+            "tsConfig": "projects/doo/tsconfig.spec.json",
+            "karmaConfig": "projects/doo/karma.conf.js",
+            "assets": [
+              "projects/doo/src/favicon.ico",
+              "projects/doo/src/assets"
+            ],
+            "styles": [
+              "projects/doo/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/doo/tsconfig.app.json",
+              "projects/doo/tsconfig.spec.json",
+              "projects/doo/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/doo/e2e/protractor.conf.js",
+            "devServerTarget": "doo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "doo:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "han"
