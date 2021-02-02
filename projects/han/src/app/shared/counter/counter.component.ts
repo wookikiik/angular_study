@@ -15,12 +15,11 @@ export class CounterComponent {
     this.count$ = this.counterService.getObservableCounter();
   }
 
-  plus() {
+  plus(): void {
     this.counterService.excute(1);
   }
 
-  minus() {
+  minus(): void {
     this.counterService.excute(-1);
   }
-  
 }
