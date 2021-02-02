@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:han": "cd ./projects/han && ng serve",
-    "start:kim": "cd ./projects/kim && ng serve",
+    "start:han": "ng serve han",
+    "start:kim": "ng serve kim",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
