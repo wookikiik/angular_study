@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import {
-  CountsService
+  CountService
 } from '../../core';
 
 @Component({
@@ -14,18 +14,18 @@ export class CountComponent implements OnInit {
   count$: Observable<number>;
 
   constructor(
-    private countsService: CountsService,
+    private countService: CountService,
   ) {}
 
   ngOnInit() {
-    this.count$ = this.countsService.getCurrentCount();
+    this.count$ = this.countService.getCurrentCount();
   }
 
   clickMinusCount() {
-    this.countsService.excuteCount(-1);
+    this.countService.excuteCount(-1);
   }
   
   clickPlusCount() {
-    this.countsService.excuteCount(1);
+    this.countService.excuteCount(1);
   }
 }

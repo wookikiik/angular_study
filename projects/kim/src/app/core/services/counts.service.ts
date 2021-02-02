@@ -4,19 +4,19 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class CountsService {
+export class CountService {
     countSubject = new BehaviorSubject(0);
     count$ = this.countSubject.asObservable();
 
-    public getCurrentCount() {
+    getCurrentCount() {
         return this.count$;
     }
 
-    public excuteCount(excuteValue) {
+    excuteCount(excuteValue) {
         this.countSubject.next(this.getCurrentValue() + excuteValue)
     }
 
-    public getCurrentValue() {
+    private getCurrentValue() {
         return this.countSubject.getValue();
     }
 }
