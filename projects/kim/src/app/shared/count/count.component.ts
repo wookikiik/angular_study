@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import {
   CountService
 } from '../../core';
+
 
 @Component({
   selector: 'app-count',
@@ -15,17 +15,17 @@ export class CountComponent implements OnInit {
 
   constructor(
     private countService: CountService,
-  ) {}
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.count$ = this.countService.getCurrentCount();
   }
 
-  clickMinusCount() {
+  clickMinusCount(): void {
     this.countService.excuteCount(-1);
   }
-  
-  clickPlusCount() {
+
+  clickPlusCount(): void {
     this.countService.excuteCount(1);
   }
 }

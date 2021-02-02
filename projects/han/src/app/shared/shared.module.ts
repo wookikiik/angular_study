@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CountComponent } from './count/count.component';
+import { CounterComponent } from './counter/counter.component';
 
 @NgModule({
   declarations: [
-    CountComponent
+    CounterComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    CountComponent
+    CounterComponent
   ]
 })
 export class SharedModule { }
