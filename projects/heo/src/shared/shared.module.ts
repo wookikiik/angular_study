@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { CounterService } from '@heo/core';
 import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
@@ -9,4 +10,16 @@ import { CounterComponent } from './components/counter/counter.component';
   ],
   exports: [CounterComponent]
 })
-export class SharedModule { }
+export class SharedModule {
+  static withCounter(): ModuleWithProviders<SharedModule>{
+    return {
+      ngModule: SharedModule,
+      providers: [
+        {
+          provide: CounterService,
+          useFactory: () => new CounterService()
+        }
+      ]
+    };
+  }
+}
