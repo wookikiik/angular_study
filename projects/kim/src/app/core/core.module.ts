@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   imports: [
@@ -8,4 +7,4 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   ],
   declarations: []
 })
-export class CoreModule {}
+export class CoreModule { }
