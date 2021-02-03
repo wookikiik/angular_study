@@ -27,16 +27,27 @@ export class CounterService {
     // > case 1
     this.count$.pipe(
       take(1)
-    ).subscribe(count =>   currentCount = count);
+    ).subscribe(count => currentCount = count);
     return currentCount;
 
     /*
+    -----------------------------------------------------
+
       > case 2
-      this.count$.subscribe(count =>   currentCount = count).unsubscribe();
+
+      let currentCount = 0;
+
+      this.count$
+        .subscribe(count =>   currentCount = count)
+        .unsubscribe();
       return currentCount;
+
+    -----------------------------------------------------
 
       > case 3
       return this.countSubject.getValue();
+
+    -----------------------------------------------------
     */
   }
 }
