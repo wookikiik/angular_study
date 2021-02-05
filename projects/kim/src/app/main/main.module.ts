@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { MainComponent } from './main.component';
+
+const routes: Routes = [
+  { path: '', component: MainComponent },
+];
 
 @NgModule({
   declarations: [
@@ -9,10 +14,8 @@ import { MainComponent } from './main.component';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    RouterModule.forChild(routes)
   ],
-  exports: [
-    MainComponent
-  ]
 })
 export class MainModule { }

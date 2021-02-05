@@ -8,7 +8,7 @@ import {
 @Component({
   selector: 'app-count',
   templateUrl: './count.component.html',
-  styleUrls: ['./count.component.css']
+  providers: [CountService]
 })
 export class CountComponent implements OnInit {
   count$: Observable<number>;
