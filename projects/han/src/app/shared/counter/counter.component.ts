@@ -6,7 +6,6 @@ import { CounterService } from '../../core/services/counter.service';
   selector: 'app-counter',
   templateUrl: './counter.component.html',
   styleUrls: ['./counter.component.css'],
-  providers: [CounterService]
 })
 export class CounterComponent implements OnInit {
   title = 'Counter Component';
