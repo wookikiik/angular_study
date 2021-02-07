@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import {
-  CountService
+  CounterService
 } from '../core';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  providers: [CountService]
+  providers: [CounterService]
 })
 export class MainComponent { }

@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class CountService {
+export class CounterService {
     countSubject = new BehaviorSubject(0);
     count$ = this.countSubject.asObservable();
 
