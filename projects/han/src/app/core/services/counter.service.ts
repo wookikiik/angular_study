@@ -1,6 +1,6 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { COUNTER_UNIT } from '../provider/counter.serivce.provider';
+import { COUNTER_UNIT } from '../provider/counter.unit.provider';
 
 @Injectable({
   providedIn: 'root',
