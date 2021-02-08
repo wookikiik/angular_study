@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
-import { MainComponent } from './main.component';
+import { counterUnitFactory, COUNTER_UNIT } from '../core/provider/counter.serivce.provider';
+import { CounterService } from '../core/services/counter.service';
 import { SharedModule } from '../shared/shared.module';
+import { MainRoutingModule } from './main-routing.module';
+import { MainComponent } from './main.component';
 
 @NgModule({
   declarations: [
     MainComponent
   ],
   imports: [
-    SharedModule
+    SharedModule,
+    MainRoutingModule
   ],
-  exports: [
-    MainComponent
-  ]
+  // providers: [CounterService, { provide: COUNTER_UNIT, useValue: 5 }]
+  providers: [CounterService, { provide: COUNTER_UNIT, useFactory: counterUnitFactory(5) }]
 })
 export class MainModule { }
