@@ -4,11 +4,9 @@ import {
   CounterService
 } from '../../core';
 
-
 @Component({
   selector: 'app-count',
   templateUrl: './counter.component.html',
-  providers: [CounterService]
 })
 export class CounterComponent implements OnInit {
   count$: Observable<number>;
@@ -22,10 +20,10 @@ export class CounterComponent implements OnInit {
   }
 
   clickMinusCount(): void {
-    this.counterService.excuteCount(-1);
+    this.counterService.excuteMinusCount();
   }
 
   clickPlusCount(): void {
-    this.counterService.excuteCount(1);
+    this.counterService.excutePlusCount();
   }
 }
