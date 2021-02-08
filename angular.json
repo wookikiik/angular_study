@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -346,6 +349,122 @@
           "configurations": {
             "production": {
               "devServerTarget": "doo:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "heo": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/heo",
+      "sourceRoot": "projects/heo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/heo",
+            "index": "projects/heo/src/index.html",
+            "main": "projects/heo/src/main.ts",
+            "polyfills": "projects/heo/src/polyfills.ts",
+            "tsConfig": "projects/heo/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/heo/src/favicon.ico",
+              "projects/heo/src/assets"
+            ],
+            "styles": [
+              "projects/heo/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/heo/src/environments/environment.ts",
+                  "with": "projects/heo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "heo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "heo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "heo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/heo/src/test.ts",
+            "polyfills": "projects/heo/src/polyfills.ts",
+            "tsConfig": "projects/heo/tsconfig.spec.json",
+            "karmaConfig": "projects/heo/karma.conf.js",
+            "assets": [
+              "projects/heo/src/favicon.ico",
+              "projects/heo/src/assets"
+            ],
+            "styles": [
+              "projects/heo/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/heo/tsconfig.app.json",
+              "projects/heo/tsconfig.spec.json",
+              "projects/heo/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/heo/e2e/protractor.conf.js",
+            "devServerTarget": "heo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "heo:serve:production"
             }
           }
         }

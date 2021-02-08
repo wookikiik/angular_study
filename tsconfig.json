@@ -15,7 +15,11 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@heo/core" : ["./projects/heo/src/core/index"],
+      "@heo/shared" : ["./projects/heo/src/shared/index"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false
