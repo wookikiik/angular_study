@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
   CounterService
-} from '../core/services/counts.service';
+} from '../core/services/countser.service';
 import { SharedModule } from '../shared/shared.module';
 import { MainComponent } from './main.component';
 
