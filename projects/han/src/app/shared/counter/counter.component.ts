@@ -20,10 +20,10 @@ export class CounterComponent implements OnInit {
   }
 
   plus(): void {
-    this.counterService.excute(1);
+    this.counterService.plusExcute();
   }
 
   minus(): void {
-    this.counterService.excute(-1);
+    this.counterService.minusExcute();
   }
 }

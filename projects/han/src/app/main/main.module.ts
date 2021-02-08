@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { counterUnitFactory, COUNTER_UNIT } from '../core/provider/counter.serivce.provider';
+import { counterUnitFactory, COUNTER_UNIT } from '../core/provider/counter.unit.provider';
 import { CounterService } from '../core/services/counter.service';
 import { SharedModule } from '../shared/shared.module';
 import { MainRoutingModule } from './main-routing.module';
