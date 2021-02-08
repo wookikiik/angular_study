@@ -1,21 +1,20 @@
 import { InjectionToken } from '@angular/core';
 
-export const TOKENS = new InjectionToken<number>('ExcuteValue');
+export const EXCUTEVALUE = new InjectionToken<number>('ExcuteValue');
 
-export const counterServiceFactory = () => {
+const excuteValueFactory = () => {
     return (excuteValue: number) => {
         return excuteValue;
     };
 };
 
-export const CounterServiceProvider = {
-    provide: TOKENS,
-    useFactory: counterServiceFactory(),
+export const ExcuteValueFactoryProvider = {
+    provide: EXCUTEVALUE,
+    useFactory: excuteValueFactory(),
     deps: ['excuteValue']
 };
 
-export const DevProvider = {
+export const ExcuteValueProvider = {
     provide: 'excuteValue',
     useValue: 5
 };
-

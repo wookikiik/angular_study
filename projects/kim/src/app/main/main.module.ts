@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CounterService } from '../core/services/counter.service';
-import { CounterServiceProvider, DevProvider } from '../core/services/counter.service.provider';
+import { ExcuteValueFactoryProvider, ExcuteValueProvider } from '../core/services/counter.service.provider';
 import { SharedModule } from '../shared/shared.module';
 import { MainComponent } from './main.component';
 
@@ -21,8 +21,8 @@ const routes: Routes = [
   ],
   providers: [
     CounterService,
-    CounterServiceProvider,
-    DevProvider
+    ExcuteValueFactoryProvider,
+    ExcuteValueProvider
   ]
 })
 export class MainModule { }

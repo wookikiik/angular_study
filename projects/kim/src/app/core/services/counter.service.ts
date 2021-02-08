@@ -1,6 +1,6 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { TOKENS } from './counter.service.provider';
+import { EXCUTEVALUE } from './counter.service.provider';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +10,7 @@ export class CounterService {
     count$ = this.countSubject.asObservable();
     excuteValue: number;
 
-    constructor(@Inject(TOKENS) @Optional() excuteValue: number) {
+    constructor(@Inject(EXCUTEVALUE) @Optional() excuteValue: number) {
         this.excuteValue = excuteValue ? excuteValue : 1;
     }
 
