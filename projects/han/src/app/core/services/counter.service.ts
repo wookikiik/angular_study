@@ -14,8 +14,12 @@ export class CounterService {
     this.unit = unit ? unit : 1;
   }
 
-  public excute(addValue: number): void {
-    this.counterSubject.next(this.getCurrentValue() + addValue * this.unit);
+  public plusExcute(): void {
+    this.counterSubject.next(this.getCurrentValue() + this.unit);
+  }
+
+  public minusExcute(): void {
+    this.counterSubject.next(this.getCurrentValue() - this.unit);
   }
 
   private getCurrentValue(): number {
