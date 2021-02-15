@@ -17,20 +17,21 @@ export class CityService {
     this.city$ = this.citySubject.asObservable();
   }
 
-  fetchCity(/* cityName 파라미터 추가 예정 */): void {
+  fetchCity(cityName: string): Observable<City> {
+    /*
+      cityName을 api 통해서 City 가져오는 로직
+    */
+
     const sampleCity: City = {
       title: 'London',
       woeid: 44418
     };
 
     this.citySubject.next(sampleCity);
+    return this.city$;
   }
 
-  getCurrentCity(): City {
-    return this.citySubject.getValue();
-  }
-
-  getObservableCity(): Observable<City> {
+  getCurrentCity(): Observable<City> {
     return this.city$;
   }
 }
