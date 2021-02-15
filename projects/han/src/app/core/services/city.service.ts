@@ -1,6 +1,8 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { City } from '../models';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ export class CityService {
   private citySubject: BehaviorSubject<City>;
   private city$: Observable<City>;
 
-  constructor() {
+  constructor(private apiService: ApiService) {
     this.citySubject = new BehaviorSubject<City>({
       title: '',
       woeid: 0
@@ -18,16 +20,8 @@ export class CityService {
   }
 
   fetchCity(cityName: string): Observable<City> {
-    /*
-      cityName을 api 통해서 City 가져오는 로직
-    */
-
-    const sampleCity: City = {
-      title: 'London',
-      woeid: 44418
-    };
-
-    this.citySubject.next(sampleCity);
+    this.apiService
+      .get('/search', new HttpParams().set('?query', cityName));
     return this.city$;
   }
 
