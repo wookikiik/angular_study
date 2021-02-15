@@ -1,6 +1,12 @@
 <p>searchcity works!</p>
-<input type="text" value="" placeholder="도시를 입력하세요">
-<button (click)="searchCity()">검색</button>
+<form [formGroup]="cityForm" (ngSubmit)="searchCity()">
+    <input formControlName="cityname" type="text" placeholder="도시 이름을 입력하세요">
+    <button type="submit">검색</button>
+    <div *ngIf="isCitynameInvalid">
+        도시를 입력하고 검색버튼을 누르세요
+    </div>
+</form>
+
 
 <p>도시 검색 결과</p>
 <a routerLink='/weather'>{{ (city$ | async)?.title }}</a>

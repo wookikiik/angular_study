@@ -9,7 +9,7 @@ import { SearchcityComponent } from './searchcity/searchcity.component';
   ],
   imports: [
     SharedModule,
-    SearchRoutingModule
+    SearchRoutingModule,
   ]
 })
 export class SearchModule { }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { City } from '../../core/models';
 import { CityService } from '../../core/services/city.service';
@@ -11,14 +12,26 @@ import { CityService } from '../../core/services/city.service';
 export class SearchcityComponent {
 
   city$: Observable<City>;
+  cityForm: FormGroup;
+  isCitynameInvalid: boolean = false;
 
   constructor(
+    private fb: FormBuilder,
     private cityService: CityService
   ) {
-    this.city$ = this.cityService.getObservableCity();
+    this.cityForm = this.fb.group({
+      cityname: ['', Validators.required]
+    });
+    this.city$ = this.cityService.getCurrentCity();
   }
 
-  searchCity(/* 도시이름 파라미터 추가 예정 */): void {
-    this.cityService.fetchCity();
+  searchCity(): void {
+    if (this.cityForm.valid) {
+      this.isCitynameInvalid = false;
+      this.cityService.fetchCity(this.cityForm.value);
+    } else {
+      this.isCitynameInvalid = true;
+    }
+
   }
 }
