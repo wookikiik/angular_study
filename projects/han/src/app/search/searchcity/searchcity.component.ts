@@ -16,9 +16,9 @@ export class SearchcityComponent {
     private cityService: CityService
   ) {
     this.city$ = this.cityService.getObservableCity();
+  }
 
-    if (cityService.getCurrentCity().title === '') {
-      cityService.fetchCity();
-    }
+  searchCity(/* 도시이름 파라미터 추가 예정 */): void {
+    this.cityService.fetchCity();
   }
 }
