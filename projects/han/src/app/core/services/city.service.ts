@@ -1,4 +1,3 @@
-import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { City } from '../models';
@@ -12,16 +11,17 @@ export class CityService {
   private city$: Observable<City>;
 
   constructor(private apiService: ApiService) {
-    this.citySubject = new BehaviorSubject<City>({
-      title: '',
-      woeid: 0
-    });
+    this.citySubject = new BehaviorSubject<City>({title: '', woeid: 0});
     this.city$ = this.citySubject.asObservable();
   }
 
   fetchCity(cityName: string): Observable<City> {
     this.apiService
-      .get('/search', new HttpParams().set('?query', cityName));
+      .get(`/search/?query=${cityName}`)
+      .subscribe(data => {
+        this.citySubject.next({title: data.title, woeid: data.woeid});
+      });
+
     return this.city$;
   }
 
