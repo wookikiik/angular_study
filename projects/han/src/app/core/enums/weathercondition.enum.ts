@@ -7,6 +7,7 @@ export enum WeatherCondition {
     lightRain,
     showers,
     heavyCloud,
+    lightCloud,
     clear,
     unknown
 }
