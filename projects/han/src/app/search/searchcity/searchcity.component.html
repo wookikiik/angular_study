@@ -1,10 +1,6 @@
-<p>searchcity works!</p>
 <form [formGroup]="cityForm" (ngSubmit)="searchCity()">
     <input formControlName="cityname" type="text" placeholder="도시 이름을 입력하세요">
     <button type="submit">검색</button>
-    <div *ngIf="isCitynameInvalid">
-        도시를 입력하고 검색버튼을 누르세요
-    </div>
 </form>
 
 
