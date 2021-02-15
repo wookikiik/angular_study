@@ -1,1 +1,5 @@
 <p>searchcity works!</p>
+<input type="text" value="" placeholder="도시를 입력하세요">
+
+<p>도시 검색 결과</p>
+<a routerLink='/weather'>{{ (city$ | async)?.title }}</a>

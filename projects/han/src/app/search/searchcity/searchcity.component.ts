@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { City } from '../../core/models';
+import { CityService } from '../../core/services/city.service';
 
 @Component({
   selector: 'app-searchcity',
   templateUrl: './searchcity.component.html',
   styleUrls: ['./searchcity.component.css']
 })
-export class SearchcityComponent implements OnInit {
+export class SearchcityComponent {
 
-  constructor() { }
+  city$: Observable<City>;
 
-  ngOnInit(): void {
+  constructor(
+    private cityService: CityService
+  ) {
+    this.city$ = this.cityService.getObservableCity();
+
+    if (cityService.getCurrentCity().title === '') {
+      cityService.fetchCity();
+    }
   }
-
 }
