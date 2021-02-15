@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { City } from '../models';
@@ -10,13 +10,10 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  get(path: string, params: HttpParams): Observable<any> {
-    console.log('path=', path);
-    console.log('params=', params);
-    const sampleCity: City = {
-      title: 'London',
-      woeid: 44418
-    };
-    return new Observable(subscriber => subscriber.next(sampleCity));
+  get(path: string): Observable<any> {
+    const sampleCity: City = {title: 'London', woeid: 44418};
+    return new Observable(subscriber => {
+      subscriber.next(sampleCity);
+    });
   }
 }
