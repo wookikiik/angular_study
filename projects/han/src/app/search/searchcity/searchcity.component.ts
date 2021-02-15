@@ -13,6 +13,7 @@ export class SearchcityComponent {
 
   city$: Observable<City>;
   cityForm: FormGroup;
+  isSubmitting = false;
 
   constructor(
     private fb: FormBuilder,
@@ -25,6 +26,8 @@ export class SearchcityComponent {
   }
 
   searchCity(): void {
-    this.cityService.fetchCity(this.cityForm.value);
+    this.isSubmitting = true;
+    const cityName = this.cityForm.value.cityname.trim();
+    this.cityService.fetchCity(cityName);
   }
 }
