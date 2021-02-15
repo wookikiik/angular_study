@@ -172,11 +172,10 @@
       - weatherinfo.component.ts : 날씨 정보 컴포넌트
 
   /search : 검색 페이지
-    - search.component.ts : 검색 페이지 컴포넌트
     - search.module.ts : 검색 페이지 모듈
     - search-routing.module.ts : 검색 페이지 라우팅 모듈
-    /city : 도시 검색 컴포넌트
-      - searchcity.component.ts : 도시 검색 컴포넌트
+    /city : 도시 검색 페이지 컴포넌트
+      - searchcity.component.ts : 도시 검색 페이지 컴포넌트
 
   /settings
     - settings.component.ts : 세팅 페이지 컴포넌트

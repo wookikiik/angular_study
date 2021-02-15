@@ -6,7 +6,16 @@ import { RouterModule } from '@angular/router';
         RouterModule.forRoot([
             {
                 path: '',
+                redirectTo: '/main',
+                pathMatch: 'full'
+            },
+            {
+                path: 'main',
                 loadChildren: () => import('./main/main.module').then(m => m.MainModule)
+            },
+            {
+                path: 'search',
+                loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
             }
         ])
     ],
