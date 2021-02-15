@@ -16,6 +16,10 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'search',
                 loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
+            },
+            {
+                path: 'weather',
+                loadChildren: () => import('./weather/weather.module').then(m => m.WeatherModule)
             }
         ])
     ],
