@@ -1,7 +1,7 @@
 <p>weatherinfo works!</p>
-<p>도시이름</p>
-<p>검색시간</p>
-<p>날씨상태</p>
-<p>평균온도</p>
-<p>최저온도</p>
-<p>최고온도</p>
+<p>도시이름: {{ weather.location }}</p>
+<p>검색시간: {{ weather.lastUpdated }}</p>
+<p>날씨상태: {{ weather.formattedCondition }}</p>
+<p>평균온도: {{ weather.temp }}</p>
+<p>최저온도: {{ weather.minTemp }}</p>
+<p>최고온도: {{ weather.maxTemp }}</p>
