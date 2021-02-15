@@ -1,0 +1,19 @@
+.container {
+    background-color: aqua;
+}
+
+div {
+    display: inline-block;
+}
+
+div.logo {
+    font-size: 20pt;
+    color: black;
+    width: 20%;
+}
+
+div.searchButton {
+    font-size: 15pt;
+    color: white;
+    width: 80%;
+}
