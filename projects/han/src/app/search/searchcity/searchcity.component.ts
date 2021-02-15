@@ -13,7 +13,7 @@ export class SearchcityComponent {
 
   city$: Observable<City>;
   cityForm: FormGroup;
-  isCitynameInvalid: boolean = false;
+  isCitynameInvalid = false;
 
   constructor(
     private fb: FormBuilder,
@@ -32,6 +32,5 @@ export class SearchcityComponent {
     } else {
       this.isCitynameInvalid = true;
     }
-
   }
 }
