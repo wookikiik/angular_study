@@ -12,21 +12,26 @@
   - Header
     - 사이트 타이틀 LOGO 메인페이지 링크 버튼
     - 도시 검색 버튼
+
+- 메인 페이지 ( /main )
+  - 사이트 메인 페이지.
+  - 도시 검색을 하지 않았을 때 전시되는 페이지.
+  - 도시 조회 페이지로 이동하는 버튼 전시.
     
 - 도시 조회 페이지 ( /search/city )
 
   - 도시를 검색하는 Search Box 와 검색 버튼
-  - 검색된 도시가 하단에 전시
-  - 전시된 도시를 클릭하여 도시 날씨 전시 페이지로 이동
+  - 검색된 도시가 하단에 전시.
+  - 전시된 도시를 클릭하여 도시 별 날씨 페이지로 이동.
 
 - 도시 별 날씨 페이지( /weather )
 
   - 세팅 버튼 (세팅 페이지 연결)
-  - 검색을 하지 않은 경우 검색 페이지로 이동하는 버튼 전시
+  - 존재하지 않는 도시를 검색한 뒤 도시 별 날씨 페이지로 이동 시 메인 페이지(/main)로 이동.
   - 도시 이름, 검색 시간, 날씨 상태 이미지/텍스트, 평균, 최저, 최고 온도 (섭씨, 화씨 지원)
 
 - 세팅 페이지 ( /settings )
-  - 기온 단위 변환 토글 버튼 : 클릭하여 전시되는 기온의 단위(섭씨, 화씨)를 설정
+  - 기온 단위 변환 토글 버튼 : 클릭하여 전시되는 기온의 단위(섭씨, 화씨)를 설정.
   - 돌아가기 버튼 (도시 별 날씨 페이지)
 
 ## Backend
@@ -51,8 +56,6 @@
   interface City {
     title: string;
     woeid: number;
-    latitude: number;
-    longitude: number;
   }
   ```
 
@@ -133,9 +136,8 @@
     minTemp: number;
     maxTemp: number;
     locationId: number;
-    created: string;
     lastUpdated: Date;
-    location: string
+    location: string;
   }
   ```
 
@@ -154,13 +156,18 @@
       - city.model.ts : 도시 정보 저장 모델
     /enums
       - weathercondition.enum.ts : 날씨 상태 별 텍스트 Enum
-
-  /weather : 메인 날씨 전시 페이지
-    - weather.component.ts : 날씨 페이지 컴포넌트
-    - weather.module.ts : 날씨 페이지 모듈
-    - weather-routing.module.ts : 날씨 페이지 라우팅 모듈
-    - weather.resolver.ts : 날씨 페이지 resolver
-    - weather.guard.ts : 날씨 페이지 guard
+  
+  /main : 메인 페이지
+    - main.component.ts : 메인 페이지 컴포넌트
+    - main-routing.module.ts : 메인 페이지 라우팅 모듈
+    - main.module.ts : 메인 페이지 모듈
+  
+  /weather : 도시 별 날씨 전시 페이지
+    - weather.component.ts : 도시 별 날씨 페이지 컴포넌트
+    - weather.module.ts : 도시 별 날씨 페이지 모듈
+    - weather-routing.module.ts : 도시 별 날씨 페이지 라우팅 모듈
+    - weather.resolver.ts : 도시 별 날씨 페이지 resolver
+    - weather.guard.ts : 도시 별 날씨 페이지 guard
     /weatherinfo
       - weatherinfo.component.ts : 날씨 정보 컴포넌트
 
