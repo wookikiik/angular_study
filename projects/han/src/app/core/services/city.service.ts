@@ -14,7 +14,7 @@ export class CityService {
 
   fetchCity(cityName: string): Observable<City> {
     this.apiService
-      .get(`/search/?query=${cityName}`)
+      .get(`/api/location/search/?query=${cityName}`)
       .subscribe(data => {
         this.citySubject.next({title: data.title, woeid: data.woeid});
       });
