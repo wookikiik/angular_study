@@ -7,13 +7,10 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class CityService {
-  private citySubject: BehaviorSubject<City>;
-  private city$: Observable<City>;
+  private citySubject: BehaviorSubject<City> = new BehaviorSubject<City>({title: '', woeid: 0});
+  private city$: Observable<City> = this.citySubject.asObservable();
 
-  constructor(private apiService: ApiService) {
-    this.citySubject = new BehaviorSubject<City>({title: '', woeid: 0});
-    this.city$ = this.citySubject.asObservable();
-  }
+  constructor(private apiService: ApiService) { }
 
   fetchCity(cityName: string): Observable<City> {
     this.apiService
