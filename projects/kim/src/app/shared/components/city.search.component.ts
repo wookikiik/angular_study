@@ -34,9 +34,4 @@ export class CitySearchComponent implements OnInit {
         this.cityData.emit(this.cityService.getCityData());
         this.weatherData.emit(this.cityService.getWeatherData());
     }
-
-    searchSampleCity(): void {
-        this.weatherData.emit(this.cityService.getWeatherData());
-        this.cityData.emit(this.cityService.getCityData());
-    }
 }
