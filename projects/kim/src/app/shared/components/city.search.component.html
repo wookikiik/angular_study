@@ -1,7 +1,5 @@
-<!-- <form (ngSubmit)='searchCity()'>
-    <input type="text" placeholder="Search City...">
+<form [formGroup]="searchCityForm" (ngSubmit)="searchCity()">
+    <input type="text" placeholder="Search City.." formControlName="city" />
     <button type='submit'>Search</button>
-</form> -->
-<input type="text" placeholder="Search..">
-<button (click)='searchCity()'>Search</button>
+</form>
 <button routerLink="/settings">Settings</button>
