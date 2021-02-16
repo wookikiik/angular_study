@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Weather } from '../core/models';
-import { CityService } from '../core/services/city.service';
-import { WeatherService } from '../core/services/weather.service';
 
 @Component({
   selector: 'app-weather',
@@ -14,15 +13,10 @@ export class WeatherComponent implements OnInit {
   weather$: Observable<Weather>;
 
   constructor(
-    private cityService: CityService,
-    private weatherService: WeatherService
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.cityService
-      .getCurrentLocationId()
-      .subscribe(locationId => {
-        this.weather$ = this.weatherService.fetchWeather(locationId);
-      });
+    console.log('weathercomponent', this.route.data);
   }
 }

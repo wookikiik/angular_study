@@ -25,6 +25,10 @@ export class WeatherService {
     return this.weather$;
   }
 
+  public getWeather(): Weather {
+    return this.weatherSubject.getValue();
+  }
+
   public getCurrentWeather(): Observable<Weather> {
     return this.weather$;
   }
