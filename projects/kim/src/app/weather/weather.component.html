@@ -1,1 +1,3 @@
-<app-city-search></app-city-search>
+<app-city-search (cityData)="viewCityData($event)"></app-city-search>
+<p>{{ (cityData$ | async).title }}</p>
+<p>{{ (cityData$ | async).woeid }}</p>
