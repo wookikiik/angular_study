@@ -19,14 +19,13 @@ export class CityComponent implements OnInit {
     this.city$ = this.cityService.getCurrentCity();
   }
 
-  searchCity(): void {
-    // const cityName = this.cityName.value === null ? '' : this.cityName.value.trim();
-    // if (cityName === '') {
-    //   alert('도시를 입력하세요');
-    //   return;
-    // } else {
-    //   this.isSubmitting = true;
-    //   this.cityService.fetchCity(cityName);
-    // }
+  searchCity(cityName: string): void {
+    if (cityName.trim().length === 0) {
+      alert('도시를 입력하세요');
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.cityService.fetchCity(cityName);
   }
 }
