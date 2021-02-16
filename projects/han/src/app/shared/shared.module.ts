@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SearchComponent } from './components/search/search.component';
 import { HeaderComponent } from './layout/header/header.component';
-
-
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +18,7 @@ import { HeaderComponent } from './layout/header/header.component';
   ],
   exports: [
     HeaderComponent,
+    SearchComponent,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
