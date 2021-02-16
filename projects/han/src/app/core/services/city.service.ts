@@ -7,7 +7,7 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class CityService {
-  private citySubject: BehaviorSubject<City> = new BehaviorSubject<City>({ title: '', woeid: 0 });
+  private citySubject: BehaviorSubject<City> = new BehaviorSubject<City>(null);
   private city$: Observable<City> = this.citySubject.asObservable();
 
   constructor(private apiService: ApiService) { }
@@ -31,10 +31,7 @@ export class CityService {
     return this.city$;
   }
 
-  private fromJsonToCity(json: any): City {
-    return {
-      title: json.title,
-      woeid: json.woeid
-    } as City;
+  private fromJsonToCity(json: { [key: string]: any }): City {
+    return json as City;
   }
 }

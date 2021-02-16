@@ -8,17 +8,7 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class WeatherService {
-  private weatherSubject: BehaviorSubject<Weather> = new BehaviorSubject<Weather>({
-    condition: null,
-    formattedCondition: '',
-    abbreviationCondition: '',
-    temp: 0,
-    minTemp: 0,
-    maxTemp: 0,
-    locationId: 0,
-    lastUpdated: null,
-    location: ''
-  });
+  private weatherSubject: BehaviorSubject<Weather> = new BehaviorSubject<Weather>(null);
   private weather$: Observable<Weather> = this.weatherSubject.asObservable();
 
   constructor(private apiService: ApiService) { }
@@ -39,7 +29,7 @@ export class WeatherService {
     return this.weather$;
   }
 
-  private fromJsonToWeather(json: any): Weather {
+  private fromJsonToWeather(json: { [key: string]: any }): Weather {
     const consolidatedWeather = json.consolidated_weather[0];
     return {
       condition: this.mapStringToWeatherCondition(consolidatedWeather.weather_state_abbr),
