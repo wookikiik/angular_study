@@ -20,7 +20,9 @@ export class CityService {
         this.citySubject.next({title: data.title, woeid: data.woeid});
       });
     */
-    this.citySubject.next(this.fromJsonToCity(MOCK_CITY));
+    this.citySubject.next(
+      (cityName === 'London') ? this.fromJsonToCity(MOCK_CITY) : { title: '', woeid: 0 }
+    );
 
     return this.city$;
   }
