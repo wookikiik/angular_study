@@ -3,7 +3,11 @@
 <div *ngIf="isSubmitting" class="result">
     <p>도시 검색 결과</p>
     <div *ngIf="(city$ | async).title !== '' else nothing">
-        <a routerLink='/weather'>{{ (city$ | async).title }}</a>
+        <ul>
+            <li>
+                <a routerLink='/weather'>{{ (city$ | async).title }}</a>
+            </li>
+        </ul>
     </div>
     <ng-template #nothing>
         <p>해당하는 도시가 없습니다. 다시 검색해주세요</p>
