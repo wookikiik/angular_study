@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CitySearchComponent, UnitToggleComponent } from './components';
-
 
 @NgModule({
   declarations: [
@@ -11,7 +11,8 @@ import { CitySearchComponent, UnitToggleComponent } from './components';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   exports: [
     CitySearchComponent,
