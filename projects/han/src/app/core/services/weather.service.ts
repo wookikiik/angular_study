@@ -8,22 +8,20 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class WeatherService {
-  private weatherSubject: BehaviorSubject<Weather>;
-  private weather$: Observable<Weather>;
+  private weatherSubject: BehaviorSubject<Weather> = new BehaviorSubject<Weather>({
+    condition: null,
+    formattedCondition: '',
+    abbreviationCondition: '',
+    temp: 0,
+    minTemp: 0,
+    maxTemp: 0,
+    locationId: 0,
+    lastUpdated: null,
+    location: ''
+  });
+  private weather$: Observable<Weather> = this.weatherSubject.asObservable();
 
-  constructor(private apiService: ApiService) {
-    this.weatherSubject = new BehaviorSubject<Weather>({
-      condition: null,
-      formattedCondition: '',
-      temp: 0,
-      minTemp: 0,
-      maxTemp: 0,
-      locationId: 0,
-      lastUpdated: null,
-      location: ''
-    });
-    this.weather$ = this.weatherSubject.asObservable();
-  }
+  constructor(private apiService: ApiService) { }
 
   public fetchWeather(locationId: number): Observable<Weather> {
     /*
@@ -46,6 +44,7 @@ export class WeatherService {
     return {
       condition: this.mapStringToWeatherCondition(consolidatedWeather.weather_state_abbr),
       formattedCondition: consolidatedWeather.weather_state_name,
+      abbreviationCondition: consolidatedWeather.weather_state_abbr,
       temp: consolidatedWeather.the_temp,
       minTemp: consolidatedWeather.min_temp,
       maxTemp: consolidatedWeather.max_temp,
