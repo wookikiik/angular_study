@@ -6,4 +6,6 @@ export interface Weather {
     maxTemp: number;
     Temp: number;
     updateDate: Date;
+    location: string;
+    locationId: number;
 }
