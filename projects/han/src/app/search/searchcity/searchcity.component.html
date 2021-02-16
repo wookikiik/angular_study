@@ -1,7 +1,6 @@
-<form [formGroup]="cityForm" (ngSubmit)="searchCity()">
-    <input formControlName="cityname" type="text" placeholder="도시 이름을 입력하세요">
-    <button type="submit">검색</button>
-</form>
+<input [formControl]="cityName" type="text" placeholder="도시 이름을 입력하세요">
+<button (click)="searchCity()">검색</button>
+
 
 <div *ngIf="isSubmitting">
     <p>도시 검색 결과</p>

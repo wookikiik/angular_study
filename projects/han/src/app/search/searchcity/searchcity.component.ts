@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { City } from '../../core/models';
 import { CityService } from '../../core/services/city.service';
@@ -12,22 +12,22 @@ import { CityService } from '../../core/services/city.service';
 export class SearchcityComponent {
 
   city$: Observable<City>;
-  cityForm: FormGroup;
+  cityName: FormControl;
   isSubmitting = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private cityService: CityService
-  ) {
-    this.cityForm = this.fb.group({
-      cityname: ['', Validators.required]
-    });
+  constructor(private cityService: CityService) {
+    this.cityName = new FormControl();
     this.city$ = this.cityService.getCurrentCity();
   }
 
   searchCity(): void {
-    this.isSubmitting = true;
-    const cityName = this.cityForm.value.cityname.trim();
-    this.cityService.fetchCity(cityName);
+    const cityName = this.cityName.value === null ? '' : this.cityName.value.trim();
+    if (cityName === '') {
+      alert('도시를 입력하세요');
+      return;
+    } else {
+      this.isSubmitting = true;
+      this.cityService.fetchCity(cityName);
+    }
   }
 }
