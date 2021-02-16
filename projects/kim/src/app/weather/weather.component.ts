@@ -17,11 +17,11 @@ export class WeatherComponent implements OnInit {
     this.weatherData$ = this.weatherService.initWeatherData();
   }
 
-  viewCityData(cityData): void {
+  viewCityData(cityData: Observable<City>): void {
     this.cityData$ = cityData;
   }
 
-  viewWeatherData(weatherData): void {
+  viewWeatherData(weatherData: Observable<Weather>): void {
     this.weatherData$ = weatherData;
   }
 }
