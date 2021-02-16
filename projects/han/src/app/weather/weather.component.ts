@@ -28,6 +28,6 @@ export class WeatherComponent implements OnInit {
         map(city => city.woeid),
         take(1)
       )
-      .subscribe(this.weatherService.fetchWeather);
+      .subscribe(locationId => this.weatherService.fetchWeather(locationId));
   }
 }
