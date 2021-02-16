@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { City, MOCK_CITY } from '../models';
 import { ApiService } from './api.service';
 
@@ -29,6 +30,13 @@ export class CityService {
 
   public getCurrentCity(): Observable<City> {
     return this.city$;
+  }
+
+  public getCurrentLocationId(): Observable<number> {
+    return this.city$.pipe(
+      map(city => city.woeid),
+      take(1)
+    );
   }
 
   private fromJsonToCity(json: { [key: string]: any }): City {
