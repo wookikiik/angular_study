@@ -12,13 +12,7 @@ export class WeatherService {
   weatherSubject: BehaviorSubject<Weather> = new BehaviorSubject<Weather>(null);
   weatherData$: Observable<Weather> = this.weatherSubject.asObservable();
 
-  constructor() {
-    // this.citySubject = new BehaviorSubject<City>(null);
-    // this.cityData$ = this.citySubject.asObservable();
-
-    // this.weatherSubject = new BehaviorSubject<Weather>(null);
-    // this.weatherData$ = this.weatherSubject.asObservable();
-  }
+  constructor() { }
 
   initCityData(): Observable<City> {
     return this.cityData$;
