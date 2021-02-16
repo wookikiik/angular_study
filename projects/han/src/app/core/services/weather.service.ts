@@ -25,7 +25,7 @@ export class WeatherService {
     this.weather$ = this.weatherSubject.asObservable();
   }
 
-  public fetchWeather(locationId: string): Observable<Weather> {
+  public fetchWeather(locationId: number): Observable<Weather> {
     /*
     this.apiService
       .get(`/api/location/${locationId}`)
@@ -34,6 +34,10 @@ export class WeatherService {
       });
     */
     this.weatherSubject.next(this.fromJsonToWeather(MOCK_WEATHER));
+    return this.weather$;
+  }
+
+  public getCurrentWeather(): Observable<Weather> {
     return this.weather$;
   }
 
