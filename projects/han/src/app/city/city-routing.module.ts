@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SearchcityComponent } from './searchcity/searchcity.component';
+import { CityComponent } from './city.component';
 
 @NgModule({
   imports: [RouterModule.forChild([
     {
-      path: 'city',
-      component: SearchcityComponent
+      path: 'search',
+      component: CityComponent
     }
   ])],
   exports: [RouterModule]
 })
-export class SearchRoutingModule { }
+export class CityRoutingModule { }
