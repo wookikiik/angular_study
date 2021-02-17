@@ -18,7 +18,7 @@ export class WeatherResolver implements Resolve<Weather> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Weather> {
         return this.cityService.getCurrentLocationId().pipe(
             switchMap(locationId => {
-                return this.weatherService.fetchWeather(locationId).pipe(take(1));
+                return this.weatherService.fetchWeather(locationId).pipe(take(2));
             }),
         );
     }

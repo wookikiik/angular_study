@@ -19,7 +19,7 @@ export class CityService {
       .get(`${this.PREFIX}?title=${this.capitalize(cityName)}`)
       .pipe(
         take(1),
-        map(data => this.fromJsonToCity(data[0]))
+        map(data => this.fromJsonToCity(data))
       ).subscribe(city => {
         this.citySubject.next(city);
       });
@@ -37,11 +37,15 @@ export class CityService {
     );
   }
 
+  public hasCity(): boolean {
+    return this.citySubject.getValue() ? true : false;
+  }
+
   private capitalize(letter: string): string {
     return letter.charAt(0).toUpperCase() + letter.slice(1).toLowerCase();
   }
 
   private fromJsonToCity(json: { [key: string]: any }): City {
-    return json as City;
+    return json[0] as City;
   }
 }

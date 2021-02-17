@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { WeatherCondition } from '../enums';
-import { MOCK_WEATHER, Weather } from '../models';
+import { Weather } from '../models';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -10,18 +10,16 @@ import { ApiService } from './api.service';
 export class WeatherService {
   private weatherSubject: BehaviorSubject<Weather> = new BehaviorSubject<Weather>(null);
   private weather$: Observable<Weather> = this.weatherSubject.asObservable();
+  private PREFIX = '/weather';
 
   constructor(private apiService: ApiService) { }
 
   public fetchWeather(locationId: number): Observable<Weather> {
-    /*
     this.apiService
-      .get(`/api/location/${locationId}`)
+      .get(`${this.PREFIX}?woeid=${locationId}`)
       .subscribe(weather => {
         this.weatherSubject.next(this.fromJsonToWeather(weather));
       });
-    */
-    this.weatherSubject.next(this.fromJsonToWeather(MOCK_WEATHER));
     return this.weather$;
   }
 
@@ -34,18 +32,20 @@ export class WeatherService {
   }
 
   private fromJsonToWeather(json: { [key: string]: any }): Weather {
-    const consolidatedWeather = json.consolidated_weather[0];
-    return {
+    const consolidatedWeather = json[0].consolidated_weather[0];
+    const convertedWeather = {
       condition: this.mapStringToWeatherCondition(consolidatedWeather.weather_state_abbr),
       formattedCondition: consolidatedWeather.weather_state_name,
       abbreviationCondition: consolidatedWeather.weather_state_abbr,
       temp: consolidatedWeather.the_temp,
       minTemp: consolidatedWeather.min_temp,
       maxTemp: consolidatedWeather.max_temp,
-      locationId: json.woeid,
+      locationId: json[0].woeid,
       lastUpdated: new Date(),
-      location: json.title
+      location: json[0].title
     } as Weather;
+    console.log('convertedWeather', convertedWeather);
+    return convertedWeather;
   }
 
   private mapStringToWeatherCondition(input: string): WeatherCondition {

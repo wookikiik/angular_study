@@ -8,7 +8,8 @@ import { WeatherResolver } from './weather.resolver';
     {
       path: '',
       component: WeatherComponent,
-      resolve: {weather: WeatherResolver}
+      resolve: { weather: WeatherResolver },
+      // canActivate: [WeatherGuard]
     }
   ])],
   exports: [RouterModule]
