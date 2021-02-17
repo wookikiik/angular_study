@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 import { Weather } from '../core/models';
 import { CityService } from '../core/services/city.service';
 import { WeatherService } from '../core/services/weather.service';
@@ -14,10 +15,11 @@ export class WeatherResolver implements Resolve<Weather> {
         private weatherService: WeatherService
     ) { }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Weather> | Weather {
-        this.cityService.getCurrentLocationId().subscribe(locationId => {
-            this.weatherService.fetchWeather(locationId);
-        });
-        return this.weatherService.getWeather();
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Weather> {
+        return this.cityService.getCurrentLocationId().pipe(
+            switchMap(locationId => {
+                return this.weatherService.fetchWeather(locationId).pipe(take(1));
+            }),
+        );
     }
 }
