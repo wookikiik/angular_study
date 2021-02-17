@@ -11,7 +11,7 @@ import { Weather } from '../../core/models';
 export class WeatherinfoComponent implements OnInit {
 
   weather: Weather = {} as Weather;
-  imageUrl = `${environment.api_url}/static/img/weather/png/64/`;
+  imageUrl = `${environment.image_api_url}/static/img/weather/png/64/`;
 
   constructor(private route: ActivatedRoute) { }
 
