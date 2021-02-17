@@ -21,10 +21,10 @@ export class SearchComponent implements OnInit {
   search = new EventEmitter<string>();
 
   ngOnInit(): void {
-    this.searchText = new FormControl();
+    this.searchText = new FormControl('');
   }
 
   submit(): void {
-    this.search.emit((this.searchText.value) == null ? '' : this.searchText.value);
+    this.search.emit(this.searchText.value);
   }
 }
