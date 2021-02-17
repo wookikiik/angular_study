@@ -26,6 +26,6 @@ export class CityComponent implements OnInit {
     }
 
     this.isSubmitting = true;
-    this.cityService.fetchCity(cityName);
+    this.cityService.fetchCityByName(cityName);
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { City, MOCK_CITY } from '../models';
+import { City } from '../models';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -10,21 +10,19 @@ import { ApiService } from './api.service';
 export class CityService {
   private citySubject: BehaviorSubject<City> = new BehaviorSubject<City>(null);
   private city$: Observable<City> = this.citySubject.asObservable();
+  private PREFIX = '/city';
 
   constructor(private apiService: ApiService) { }
 
-  public fetchCity(cityName: string): Observable<City> {
-    /*
+  public fetchCityByName(cityName: string): Observable<City> {
     this.apiService
-      .get(`/api/location/search/?query=${cityName}`)
-      .subscribe(data => {
-        this.citySubject.next({title: data.title, woeid: data.woeid});
+      .get(`${this.PREFIX}?title=${this.capitalize(cityName)}`)
+      .pipe(
+        take(1),
+        map(data => this.fromJsonToCity(data[0]))
+      ).subscribe(city => {
+        this.citySubject.next(city);
       });
-    */
-    this.citySubject.next(
-      (cityName === 'London') ? this.fromJsonToCity(MOCK_CITY) : { title: '', woeid: 0 }
-    );
-
     return this.city$;
   }
 
@@ -37,6 +35,10 @@ export class CityService {
       map(city => city.woeid),
       take(1)
     );
+  }
+
+  private capitalize(letter: string): string {
+    return letter.charAt(0).toUpperCase() + letter.slice(1).toLowerCase();
   }
 
   private fromJsonToCity(json: { [key: string]: any }): City {
