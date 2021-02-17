@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { City, Weather } from '../core/models';
-import { WeatherService } from '../core/services';
+import { CityService } from '../core/services/city.service';
+import { WeatherService } from '../core/services/weather.service';
+
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
-  cityData$: Observable<City>;
   weatherData$: Observable<Weather>;
-  constructor(private weatherService: WeatherService) { }
+  cityData$: Observable<City>;
+  constructor(
+    private weatherService: WeatherService,
+    private cityService: CityService
+  ) { }
 
   ngOnInit(): void {
-    this.cityData$ = this.weatherService.initCityData();
-    this.weatherData$ = this.weatherService.initWeatherData();
+    this.weatherData$ = this.weatherService.getWeatherData();
+    this.cityService.getCityData().subscribe(city => {
+      if (city !== null) { this.weatherService.setWeatherData(); }
+    });
   }
 
-  viewCityData(cityData: Observable<City>): void {
-    this.cityData$ = cityData;
-  }
-
-  viewWeatherData(weatherData: Observable<Weather>): void {
-    this.weatherData$ = weatherData;
-  }
 }
