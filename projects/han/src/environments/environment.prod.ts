@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  api_url: 'https://www.metaweather.com'
+  image_api_url: 'https://www.metaweather.com',
+  api_url: 'http://localhost:3000'
 };
