@@ -10,26 +10,25 @@ import { ApiService } from './api.service';
 export class WeatherService {
 
   weatherSubject: BehaviorSubject<Weather> = new BehaviorSubject<Weather>(null);
-  weatherData$: Observable<Weather> = this.weatherSubject.asObservable();
+  weather$: Observable<Weather> = this.weatherSubject.asObservable();
 
   constructor(
     private apiService: ApiService,
   ) { }
 
-  getWeatherData(): Observable<Weather> {
-    return this.weatherData$;
-  }
-
-  setWeatherData(): void {
-    const WEATHERDATA: Weather = {
-      condition: WeatherCondition.clear,
+  setWeatherData(locationId: number): void {
+    /*
+    apiService 추가
+    https://www.metaweather.com/api/location/$locationId
+    */
+    this.weatherSubject.next({
+      condition: WeatherCondition.snow,
+      formattedCondition: 'Showers',
       minTemp: 10,
       maxTemp: 20,
       Temp: 15,
       updateDate: new Date(),
       location: 'Seoul',
-      locationId: 1132599
-    };
-    this.weatherSubject.next(WEATHERDATA);
+    });
   }
 }

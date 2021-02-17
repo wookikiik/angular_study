@@ -9,22 +9,21 @@ import { ApiService } from './api.service';
 export class CityService {
 
   citySubject: BehaviorSubject<City> = new BehaviorSubject<City>(null);
-  cityData$: Observable<City> = this.citySubject.asObservable();
+  city$: Observable<City> = this.citySubject.asObservable();
 
   constructor(
     private apiService: ApiService,
   ) { }
 
-  getCityData(): Observable<City> {
-    return this.cityData$;
-  }
-
-  setCityData(): void {
-    const CITYDATA: City = {
+  searchCity(cityName: string): void {
+    /*
+    apiService 추가
+    https://www.metaweather.com/api/location/search/?query=$cityName
+    */
+    this.citySubject.next({
       title: 'Seoul',
       woeid: 1132599
-    };
-    this.citySubject.next(CITYDATA);
+    });
   }
 
 }

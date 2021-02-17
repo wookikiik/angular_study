@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CityService } from '../../core/services/city.service';
 
@@ -6,7 +6,8 @@ import { CityService } from '../../core/services/city.service';
     selector: 'app-city-search',
     templateUrl: './city.search.component.html'
 })
-export class CitySearchComponent implements OnInit {
+export class CitySearchComponent {
+
     searchCityForm: FormGroup;
 
     constructor(
@@ -14,14 +15,11 @@ export class CitySearchComponent implements OnInit {
         private fb: FormBuilder
     ) {
         this.searchCityForm = this.fb.group({
-            city: ['Seoul', [Validators.required]]
+            city: ['', [Validators.required]]
         });
     }
 
-    ngOnInit(): void {
-    }
-
-    searchCity(): void {
-        this.cityService.setCityData();
+    clickSearchCityButton(): void {
+        this.cityService.searchCity(this.searchCityForm.get('city').value);
     }
 }
