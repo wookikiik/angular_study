@@ -1,0 +1,19 @@
+.weather_container {
+    display: flex;
+    width: 100%;
+}
+
+.weather_image {
+    order: 1;
+    width: 30%;
+}
+
+img {
+    width: 100%;
+}
+
+.weather_info {
+    order: 2;
+    width: 70%;
+    padding-left: 10px;
+}
