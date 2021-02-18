@@ -40,7 +40,12 @@ export class CityService {
       Temp: 15,
       updateDate: new Date()
     };
-    this.weatherSubject.next(WEATHERDATA);
+    this.weatherSubject.next(null);
+  }
+
+  initCityData(): Observable<City> {
+    this.citySubject.next(null);
+    return this.cityData$;
   }
 
 }
