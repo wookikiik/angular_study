@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { WeatherComponent } from './weather.component';
+import { WeatherGuard } from './weather.guard';
 import { WeatherResolver } from './weather.resolver';
 
 @NgModule({
@@ -9,7 +10,7 @@ import { WeatherResolver } from './weather.resolver';
       path: '',
       component: WeatherComponent,
       resolve: { weather: WeatherResolver },
-      // canActivate: [WeatherGuard]
+      canActivate: [WeatherGuard]
     }
   ])],
   exports: [RouterModule]

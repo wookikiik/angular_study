@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { CityService } from '../core/services/city.service';
 
 @Injectable({
@@ -11,14 +13,13 @@ export class WeatherGuard implements CanActivate {
         private router: Router
     ) { }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
-        // const isValid = this.cityService.hasCity();
-        // console.log(isValid);
-        // if (!isValid) {
-        //     return this.router.createUrlTree(['/']);
-        // }
-        // return this.cityService.hasCity();
-        return this.router.createUrlTree(['/']);
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+        return this.cityService.getCurrentCity().pipe(
+            take(1),
+            map(city => {
+                return city != null ? true : this.router.createUrlTree(['/']);
+            })
+        );
     }
 
 }
