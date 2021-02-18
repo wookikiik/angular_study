@@ -1,7 +1,5 @@
 <div class="weather_container">
-    <div class="weather_image">
-        <img src='{{ imageUrl }}{{weather.abbreviationCondition}}.png' />
-        <img [src]="mapConditionToImage(weather.condition)" />
+    <div class="weather_image" [weatherConditionImage]="weather.condition">
     </div>
     <div class="weather_info">
         <ul>

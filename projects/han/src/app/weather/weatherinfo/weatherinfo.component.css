@@ -5,7 +5,8 @@
 
 .weather_image {
     order: 1;
-    width: 30%;
+    width: 25%;
+    padding-top:25%;
 }
 
 img {
