@@ -32,16 +32,16 @@ export class CityService {
 
   public getCurrentLocationId(): Observable<number> {
     return this.city$.pipe(
-      map(city => city.woeid),
-      take(1)
+      take(1),
+      map(city => city.woeid)
     );
   }
 
-  public hasCity(): boolean {
-    return this.citySubject.getValue() ? true : false;
-  }
-
   private fromJsonToCity(json: { [key: string]: any }): City {
-    return json[0] as City;
+    const cityJson = json[0];
+    return {
+      title: cityJson.title,
+      woeid: cityJson.woeid
+    } as City;
   }
 }
