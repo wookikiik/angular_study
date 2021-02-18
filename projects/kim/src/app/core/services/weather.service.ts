@@ -1,25 +1,34 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { City, Weather } from '../models';
+import { WeatherCondition } from '../enums';
+import { Weather } from '../models';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
-  citySubject: BehaviorSubject<City> = new BehaviorSubject<City>(null);
-  cityData$: Observable<City> = this.citySubject.asObservable();
 
   weatherSubject: BehaviorSubject<Weather> = new BehaviorSubject<Weather>(null);
-  weatherData$: Observable<Weather> = this.weatherSubject.asObservable();
+  weather$: Observable<Weather> = this.weatherSubject.asObservable();
 
-  constructor() { }
+  constructor(
+    private apiService: ApiService,
+  ) { }
 
-  initCityData(): Observable<City> {
-    return this.cityData$;
+  setWeatherData(locationId: number): void {
+    /*
+    apiService 추가
+    https://www.metaweather.com/api/location/$locationId
+    */
+    this.weatherSubject.next({
+      condition: WeatherCondition.snow,
+      formattedCondition: 'Showers',
+      minTemp: 10,
+      maxTemp: 20,
+      Temp: 15,
+      updateDate: new Date(),
+      location: 'Seoul',
+    });
   }
-
-  initWeatherData(): Observable<Weather> {
-    return this.weatherData$;
-  }
-
 }
