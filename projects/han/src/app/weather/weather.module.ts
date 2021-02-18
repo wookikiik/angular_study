@@ -4,8 +4,6 @@ import { WeatherRoutingModule } from './weather-routing.module';
 import { WeatherComponent } from './weather.component';
 import { WeatherinfoComponent } from './weatherinfo/weatherinfo.component';
 
-
-
 @NgModule({
   declarations: [
     WeatherComponent,

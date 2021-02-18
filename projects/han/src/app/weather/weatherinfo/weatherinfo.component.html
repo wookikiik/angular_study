@@ -1,9 +1,14 @@
-<p>도시이름: {{ (weather$ | async).location }}</p>
-<div *ngIf="(weather$ | async).abbreviationCondition !== ''">
-    <img src='{{ imageUrl }}{{(weather$ | async).abbreviationCondition}}.png' />
+<div class="weather_container">
+    <div class="weather_image">
+        <img src='{{ imageUrl }}{{weather.abbreviationCondition}}.png' />
+    </div>
+    <div class="weather_info">
+        <ul>
+            <li>검색시간: {{ weather.lastUpdated | date: 'yyyy년 MM월 dd일 HH시 mm분 ss초'}}</li>
+            <li>상태: {{ weather.formattedCondition }}</li>
+            <li>평균온도: {{ weather.temp }}</li>
+            <li>최저온도: {{ weather.minTemp }}</li>
+            <li>최고온도: {{ weather.maxTemp }}</li>
+        </ul>
+    </div>
 </div>
-<p>날씨상태: {{ (weather$ | async).formattedCondition }}</p>
-<p>평균온도: {{ (weather$ | async).temp }}</p>
-<p>최저온도: {{ (weather$ | async).minTemp }}</p>
-<p>최고온도: {{ (weather$ | async).maxTemp }}</p>
-<p>검색시간: {{ (weather$ | async).lastUpdated | date: 'yyyy년 MM월 dd일 HH시 mm분 ss초'}}</p>

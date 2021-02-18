@@ -18,7 +18,7 @@
   - 도시 검색을 하지 않았을 때 전시되는 페이지.
   - 도시 조회 페이지로 이동하는 버튼 전시.
     
-- 도시 조회 페이지 ( /search/city )
+- 도시 조회 페이지 ( /city/search )
 
   - 도시를 검색하는 Search Box 와 검색 버튼
   - 검색된 도시가 하단에 전시.
@@ -132,6 +132,7 @@
   interface Weather {
     condition: WeatherCondition;
     formattedCondition: string;
+    abbreviationCondition: string;
     temp: number;
     minTemp: number;
     maxTemp: number;
@@ -171,11 +172,12 @@
     /weatherinfo
       - weatherinfo.component.ts : 날씨 정보 컴포넌트
 
-  /search : 검색 페이지
-    - search.module.ts : 검색 페이지 모듈
-    - search-routing.module.ts : 검색 페이지 라우팅 모듈
-    /city : 도시 검색 페이지 컴포넌트
-      - searchcity.component.ts : 도시 검색 페이지 컴포넌트
+  /city : 도시 검색 페이지
+    - city.component.ts : 도시 검색 페이지 컴포넌트
+    - city.module.ts : 검색 페이지 모듈
+    - city-routing.module.ts : 검색 페이지 라우팅 모듈
+    /search
+      - search.component.ts : 도시 검색 컴포넌트
 
   /settings
     - settings.component.ts : 세팅 페이지 컴포넌트
@@ -185,6 +187,7 @@
   /shared
     - shared.module.ts : 공통 공유 모듈
     /layout
+      /header
         - header.component.ts : 공통 헤더 컴포넌트
     /pipes
       - temperature.pipe.ts : 온도 단위를 변환하여 전시하기 위한 온도 파이프

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { Weather } from '../core/models';
-import { CityService } from '../core/services/city.service';
-import { WeatherService } from '../core/services/weather.service';
 
 @Component({
   selector: 'app-weather',
@@ -11,23 +8,15 @@ import { WeatherService } from '../core/services/weather.service';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
+  weather: Weather;
 
-  weather$: Observable<Weather>;
-
-  constructor(
-    private cityService: CityService,
-    private weatherService: WeatherService
-  ) {
-    this.weather$ = weatherService.getCurrentWeather();
-  }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.cityService
-      .getCurrentCity()
-      .pipe(
-        map(city => city.woeid),
-        take(1)
-      )
-      .subscribe(locationId => this.weatherService.fetchWeather(locationId));
+    this.route.data.subscribe(data => {
+      this.weather = data.weather;
+    });
   }
+
+
 }

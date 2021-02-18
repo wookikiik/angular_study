@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    margin: 30px 0 0 0;
+}
+
+.searchBox {
+    order: 1;
+}
+
+.searchBtn {
+    order: 2;
+}

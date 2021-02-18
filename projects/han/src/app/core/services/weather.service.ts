@@ -1,37 +1,25 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { WeatherCondition } from '../enums';
-import { MOCK_WEATHER, Weather } from '../models';
+import { Weather } from '../models';
 import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
-  private weatherSubject: BehaviorSubject<Weather> = new BehaviorSubject<Weather>({
-    condition: null,
-    formattedCondition: '',
-    abbreviationCondition: '',
-    temp: 0,
-    minTemp: 0,
-    maxTemp: 0,
-    locationId: 0,
-    lastUpdated: null,
-    location: ''
-  });
+  private weatherSubject: BehaviorSubject<Weather> = new BehaviorSubject<Weather>(null);
   private weather$: Observable<Weather> = this.weatherSubject.asObservable();
+  private API_PREFIX = '/api/location';
 
   constructor(private apiService: ApiService) { }
 
   public fetchWeather(locationId: number): Observable<Weather> {
-    /*
     this.apiService
-      .get(`/api/location/${locationId}`)
+      .get(`${this.API_PREFIX}/${locationId}`)
       .subscribe(weather => {
         this.weatherSubject.next(this.fromJsonToWeather(weather));
       });
-    */
-    this.weatherSubject.next(this.fromJsonToWeather(MOCK_WEATHER));
     return this.weather$;
   }
 
@@ -39,19 +27,20 @@ export class WeatherService {
     return this.weather$;
   }
 
-  private fromJsonToWeather(json: any): Weather {
+  private fromJsonToWeather(json: { [key: string]: any }): Weather {
     const consolidatedWeather = json.consolidated_weather[0];
-    return {
+    const convertedWeather = {
       condition: this.mapStringToWeatherCondition(consolidatedWeather.weather_state_abbr),
       formattedCondition: consolidatedWeather.weather_state_name,
       abbreviationCondition: consolidatedWeather.weather_state_abbr,
       temp: consolidatedWeather.the_temp,
       minTemp: consolidatedWeather.min_temp,
       maxTemp: consolidatedWeather.max_temp,
-      locationId: json.woeid,
+      locationId: json.id,
       lastUpdated: new Date(),
       location: json.title
     } as Weather;
+    return convertedWeather;
   }
 
   private mapStringToWeatherCondition(input: string): WeatherCondition {

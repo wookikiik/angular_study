@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { environment } from 'projects/han/src/environments/environment';
-import { Observable } from 'rxjs';
 import { Weather } from '../../core/models';
-import { WeatherService } from '../../core/services/weather.service';
 
 @Component({
   selector: 'app-weatherinfo',
@@ -12,9 +11,8 @@ import { WeatherService } from '../../core/services/weather.service';
 export class WeatherinfoComponent {
 
   @Input()
-  weather$: Observable<Weather>;
+  weather: Weather;
+  imageUrl = `${environment.image_api_url}/static/img/weather/png/64/`;
 
-  imageUrl = `${environment.api_url}/static/img/weather/png/64/`;
-
-  constructor(private weatherService: WeatherService) { }
+  constructor(private route: ActivatedRoute) { }
 }
