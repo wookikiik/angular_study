@@ -2,9 +2,9 @@
 <app-search (search)="searchCity($event)" [textInputOptions]="textInputOptions">
 </app-search>
 
-<div *ngIf="isSubmitting && (city$ | async) != null" class="result">
+<div *ngIf="isSubmitting && city != null" class="result">
     <h2>도시 검색 결과</h2>
-    <div *ngIf="(city$ | async) let city">
+    <div>
         <ul *ngIf="city.title  else nothing">
             <li>
                 <a routerLink='/weather'>{{ city.title }}</a>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { take, takeLast } from 'rxjs/operators';
 import { City, TextInputOptions } from '../core/models';
 import { CityService } from '../core/services/city.service';
 
@@ -8,9 +9,10 @@ import { CityService } from '../core/services/city.service';
   templateUrl: './city.component.html',
   styleUrls: ['./city.component.css']
 })
-export class CityComponent implements OnInit {
+export class CityComponent implements OnInit, OnDestroy {
 
-  city$: Observable<City>;
+  city: City;
+  subscription: Subscription;
   isSubmitting = false;
   title = '도시 검색 페이지';
   textInputOptions: TextInputOptions = {
@@ -23,7 +25,16 @@ export class CityComponent implements OnInit {
   constructor(private cityService: CityService) { }
 
   ngOnInit(): void {
-    this.city$ = this.cityService.getCurrentCity();
+    console.log('onInit');
+    // this.subscription = this.cityService.getCurrentCity().subscribe(city => {
+    //   console.log('received city', city);
+    //   this.city = city;
+    //   this.isSubmitting = true;
+    // });
+  }
+
+  ngOnDestroy(): void {
+    // this.subscription.unsubscribe();
   }
 
   searchCity(cityName: string): void {
@@ -32,7 +43,11 @@ export class CityComponent implements OnInit {
       return;
     }
 
-    this.isSubmitting = true;
-    this.cityService.fetchCityByName(cityName);
+    // this.cityService.fetchCityByName(cityName).pipe(distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b))).subscribe(city=>console.log('fetch city', city));
+    this.cityService.fetchCityByName(cityName).pipe(take(2),takeLast(1)).subscribe(city => {
+      console.log('received city', city);
+      this.city = city;
+      this.isSubmitting = true;
+    });
   }
 }
