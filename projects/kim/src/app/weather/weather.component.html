@@ -1,0 +1,11 @@
+<app-city-search></app-city-search>
+
+<div *ngIf="(weather$ | async) as weather">
+    <p>{{ weather.condition }}</p>
+    <p>{{ weather.maxTemp }}</p>
+    <p>{{ weather.minTemp }}</p>
+    <p>{{ weather.Temp }}</p>
+    <p>{{ weather.updateDate | date: 'h:mm a' }}</p>
+</div>
+
+<button routerLink="/settings">Settings</button>
