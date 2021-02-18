@@ -12,6 +12,7 @@ export class CityComponent implements OnInit {
 
   city$: Observable<City>;
   isSubmitting = false;
+  title = '도시 검색 페이지';
 
   constructor(private cityService: CityService) { }
 

@@ -1,16 +1,17 @@
+<h1>{{title}}</h1>
 <app-search (search)="searchCity($event)" width="300" height="20" placeholderText="현재 날씨를 알고싶은 도시명을 입력하세요">
 </app-search>
 
-<div *ngIf="isSubmitting" class="result">
-    <p>도시 검색 결과</p>
-    <div *ngIf="(city$ | async) let city else nothing">
-        <ul>
+<div *ngIf="isSubmitting && (city$ | async) != null" class="result">
+    <h2>도시 검색 결과</h2>
+    <div *ngIf="(city$ | async) let city">
+        <ul *ngIf="city.title  else nothing">
             <li>
                 <a routerLink='/weather'>{{ city.title }}</a>
             </li>
         </ul>
+        <ng-template #nothing>
+            <h3 class="nothing">해당하는 도시가 없습니다.</h3>
+        </ng-template>
     </div>
-    <ng-template #nothing>
-        <p>해당하는 도시가 없습니다. 다시 검색해주세요</p>
-    </ng-template>
 </div>
