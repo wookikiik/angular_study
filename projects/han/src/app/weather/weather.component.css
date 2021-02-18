@@ -1,0 +1,13 @@
+.weather_header {
+    display: flex;
+}
+
+.title {
+    order: 1;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.settingsBtn {
+    order: 2;
+}

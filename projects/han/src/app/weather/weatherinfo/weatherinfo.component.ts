@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'projects/han/src/environments/environment';
 import { Weather } from '../../core/models';
@@ -8,16 +8,11 @@ import { Weather } from '../../core/models';
   templateUrl: './weatherinfo.component.html',
   styleUrls: ['./weatherinfo.component.css']
 })
-export class WeatherinfoComponent implements OnInit {
+export class WeatherinfoComponent {
 
-  weather: Weather = {} as Weather;
+  @Input()
+  weather: Weather;
   imageUrl = `${environment.image_api_url}/static/img/weather/png/64/`;
 
   constructor(private route: ActivatedRoute) { }
-
-  ngOnInit(): void {
-    this.route.data.subscribe(data => {
-      this.weather = data.weather;
-    });
-  }
 }
