@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+import { ApiConstants } from '../../shared/global.constant';
 import { City } from '../models';
 import { ApiService } from './api.service';
 
@@ -10,15 +11,13 @@ import { ApiService } from './api.service';
 export class CityService {
   private citySubject: BehaviorSubject<City> = new BehaviorSubject<City>(null);
   private city$: Observable<City> = this.citySubject.asObservable();
-  private API_PREFIX = '/api/location/search';
 
   constructor(private apiService: ApiService) { }
 
   public fetchCityByName(cityName: string): Observable<City> {
     this.apiService
-      .get(`${this.API_PREFIX}?query=${cityName.toLowerCase()}`)
+      .get(`${ApiConstants.SEARCH_CITY_PREFIX}?query=${cityName.toLowerCase()}`)
       .pipe(
-        take(1),
         map(data => data.length === 0 ? {} as City : this.fromJsonToCity(data))
       ).subscribe(city => {
         this.citySubject.next(city);
@@ -37,8 +36,8 @@ export class CityService {
     );
   }
 
-  private fromJsonToCity(json: { [key: string]: any }): City {
-    const cityJson = json[0];
+  private fromJsonToCity(jsonArray: [{ [key: string]: any }]): City {
+    const cityJson = jsonArray[0];
     return {
       title: cityJson.title,
       woeid: cityJson.woeid
