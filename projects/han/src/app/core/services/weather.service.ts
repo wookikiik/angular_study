@@ -10,21 +10,17 @@ import { ApiService } from './api.service';
 export class WeatherService {
   private weatherSubject: BehaviorSubject<Weather> = new BehaviorSubject<Weather>(null);
   private weather$: Observable<Weather> = this.weatherSubject.asObservable();
-  private PREFIX = '/weather';
+  private API_PREFIX = '/api/location';
 
   constructor(private apiService: ApiService) { }
 
   public fetchWeather(locationId: number): Observable<Weather> {
     this.apiService
-      .get(`${this.PREFIX}?woeid=${locationId}`)
+      .get(`${this.API_PREFIX}/${locationId}`)
       .subscribe(weather => {
         this.weatherSubject.next(this.fromJsonToWeather(weather));
       });
     return this.weather$;
-  }
-
-  public getWeather(): Weather {
-    return this.weatherSubject.getValue();
   }
 
   public getCurrentWeather(): Observable<Weather> {
@@ -44,7 +40,6 @@ export class WeatherService {
       lastUpdated: new Date(),
       location: json[0].title
     } as Weather;
-    console.log('convertedWeather', convertedWeather);
     return convertedWeather;
   }
 

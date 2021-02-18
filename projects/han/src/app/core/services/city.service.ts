@@ -10,13 +10,13 @@ import { ApiService } from './api.service';
 export class CityService {
   private citySubject: BehaviorSubject<City> = new BehaviorSubject<City>(null);
   private city$: Observable<City> = this.citySubject.asObservable();
-  private PREFIX = '/city';
+  private API_PREFIX = '/api/location/search';
 
   constructor(private apiService: ApiService) { }
 
   public fetchCityByName(cityName: string): Observable<City> {
     this.apiService
-      .get(`${this.PREFIX}?title=${this.capitalize(cityName)}`)
+      .get(`${this.API_PREFIX}?query=${cityName.toLowerCase()}`)
       .pipe(
         take(1),
         map(data => this.fromJsonToCity(data))
@@ -39,10 +39,6 @@ export class CityService {
 
   public hasCity(): boolean {
     return this.citySubject.getValue() ? true : false;
-  }
-
-  private capitalize(letter: string): string {
-    return letter.charAt(0).toUpperCase() + letter.slice(1).toLowerCase();
   }
 
   private fromJsonToCity(json: { [key: string]: any }): City {
