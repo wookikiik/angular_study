@@ -19,7 +19,7 @@ export class CityService {
       .get(`${this.API_PREFIX}?query=${cityName.toLowerCase()}`)
       .pipe(
         take(1),
-        map(data => this.fromJsonToCity(data))
+        map(data => data.length === 0 ? {} as City : this.fromJsonToCity(data))
       ).subscribe(city => {
         this.citySubject.next(city);
       });
