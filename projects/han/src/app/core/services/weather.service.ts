@@ -28,7 +28,7 @@ export class WeatherService {
   }
 
   private fromJsonToWeather(json: { [key: string]: any }): Weather {
-    const consolidatedWeather = json[0].consolidated_weather[0];
+    const consolidatedWeather = json.consolidated_weather[0];
     const convertedWeather = {
       condition: this.mapStringToWeatherCondition(consolidatedWeather.weather_state_abbr),
       formattedCondition: consolidatedWeather.weather_state_name,
@@ -36,9 +36,9 @@ export class WeatherService {
       temp: consolidatedWeather.the_temp,
       minTemp: consolidatedWeather.min_temp,
       maxTemp: consolidatedWeather.max_temp,
-      locationId: json[0].woeid,
+      locationId: json.id,
       lastUpdated: new Date(),
-      location: json[0].title
+      location: json.title
     } as Weather;
     return convertedWeather;
   }
