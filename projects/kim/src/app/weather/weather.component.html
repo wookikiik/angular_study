@@ -1,14 +1,11 @@
-<app-city-search (cityData)="viewCityData($event)" (weatherData)="viewWeatherData($event)"></app-city-search>
-<div>
-    <div *ngIf="cityData$ | async">
-        <p>{{ (cityData$ | async).title }}</p>
-        <p>{{ (cityData$ | async).woeid }}</p>
-    </div>
-    <div *ngIf="weatherData$ | async">
-        <p>{{ (weatherData$ | async).condition }}</p>
-        <p>{{ (weatherData$ | async).maxTemp }}</p>
-        <p>{{ (weatherData$ | async).minTemp }}</p>
-        <p>{{ (weatherData$ | async).Temp }}</p>
-        <p>{{ (weatherData$ | async).updateDate }}</p>
-    </div>
+<app-city-search></app-city-search>
+
+<div *ngIf="(weather$ | async) as weather">
+    <p>{{ weather.condition }}</p>
+    <p>{{ weather.maxTemp }}</p>
+    <p>{{ weather.minTemp }}</p>
+    <p>{{ weather.Temp }}</p>
+    <p>{{ weather.updateDate | date: 'h:mm a' }}</p>
 </div>
+
+<button routerLink="/settings">Settings</button>
