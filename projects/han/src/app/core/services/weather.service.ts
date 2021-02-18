@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ApiConstants } from '../../shared/global.constant';
+import { ApiConstants } from '../../shared/constants';
 import { WeatherCondition } from '../enums';
 import { Weather } from '../models';
 import { ApiService } from './api.service';
