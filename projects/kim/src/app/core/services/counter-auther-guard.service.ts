@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 import { CounterService } from './counter.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class CounterAuthGuard implements CanActivate {
 
     constructor(private counterService: CounterService) { }
 
     canActivate(): Observable<boolean> {
-        return this.counterService.isAuthenticated$;
+        return this.counterService.getAuth();
     }
 }

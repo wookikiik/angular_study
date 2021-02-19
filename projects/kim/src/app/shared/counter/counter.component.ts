@@ -15,11 +15,8 @@ export class CounterComponent implements OnInit {
     this.count$ = this.counterService.count$;
   }
 
-  clickMinusCount(minusNumber: number): void {
-    this.counterService.excuteCounter(minusNumber);
+  clickCount(triggrCount: number): void {
+    this.counterService.excuteCounter(triggrCount);
   }
 
-  clickPlusCount(plusNumber: number): void {
-    this.counterService.excuteCounter(plusNumber);
-  }
 }
