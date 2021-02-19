@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { TextInputOptions } from '../../../core/models';
 
 @Component({
   selector: 'app-search',
@@ -7,21 +8,16 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+
   searchText: FormControl;
 
-  @Input()
-  placeholderText: string;
-
-  @Input()
-  width: number;
-  @Input()
-  height: number;
+  @Input() textInputOptions: TextInputOptions;
 
   @Output()
   search = new EventEmitter<string>();
 
   ngOnInit(): void {
-    this.searchText = new FormControl('');
+    this.searchText = new FormControl(this.textInputOptions.initialValue ? this.textInputOptions.initialValue : '');
   }
 
   submit(): void {

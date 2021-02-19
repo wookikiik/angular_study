@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { City } from '../core/models';
+import { Component } from '@angular/core';
+import { of } from 'rxjs';
+import { catchError, skip, take } from 'rxjs/operators';
+import { City, TextInputOptions } from '../core/models';
 import { CityService } from '../core/services/city.service';
 
 @Component({
@@ -8,17 +9,19 @@ import { CityService } from '../core/services/city.service';
   templateUrl: './city.component.html',
   styleUrls: ['./city.component.css']
 })
-export class CityComponent implements OnInit {
+export class CityComponent {
 
-  city$: Observable<City>;
+  city: City;
   isSubmitting = false;
   title = '도시 검색 페이지';
+  textInputOptions: TextInputOptions = {
+    initialValue: '',
+    placeholderText: '현재 날씨를 알고싶은 도시명을 입력하세요.',
+    width: 300,
+    height: 20
+  };
 
   constructor(private cityService: CityService) { }
-
-  ngOnInit(): void {
-    this.city$ = this.cityService.getCurrentCity();
-  }
 
   searchCity(cityName: string): void {
     if (cityName.trim().length === 0) {
@@ -26,7 +29,16 @@ export class CityComponent implements OnInit {
       return;
     }
 
-    this.isSubmitting = true;
-    this.cityService.fetchCityByName(cityName);
+    this.cityService.fetchCityByName(cityName).pipe(
+      skip(1),
+      take(1),
+      catchError((err) => {
+        this.isSubmitting = false;
+        return of({ title: '', woeid: 0 } as City).pipe(take(1));
+      })
+    ).subscribe(city => {
+      this.city = city;
+      this.isSubmitting = true;
+    });
   }
 }
