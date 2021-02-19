@@ -15,8 +15,7 @@ export class CounterComponent implements OnInit {
     this.count$ = this.counterService.count$;
   }
 
-  clickCount(triggrCount: number): void {
-    this.counterService.excuteCounter(triggrCount);
+  clickCount(triggrSign?: string): void {
+    this.counterService.excuteCounter(triggrSign);
   }
-
 }
