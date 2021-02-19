@@ -9,6 +9,6 @@ export class CounterAuthGuard implements CanActivate {
     constructor(private counterService: CounterService) { }
 
     canActivate(): Observable<boolean> {
-        return this.counterService.getAuth();
+        return this.counterService.isAuthedCount();
     }
 }

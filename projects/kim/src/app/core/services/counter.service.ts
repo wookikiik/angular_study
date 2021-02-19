@@ -21,12 +21,14 @@ export class CounterService {
         return this.countSubject.getValue();
     }
 
-    excuteCounter(triggrCount: number): void {
-        this.countSubject.next(this.getCurrentValue() + (this.excuteValue * triggrCount));
+    excuteCounter(triggrSign: string): void {
+        triggrSign ?
+            this.countSubject.next(this.getCurrentValue() - this.excuteValue) :
+            this.countSubject.next(this.getCurrentValue() + this.excuteValue);
     }
 
-    getAuth(): Observable<boolean> {
-        return this.count$.pipe(map(countValue => (countValue >= 5) ? true : false), take(1));
+    isAuthedCount(): Observable<boolean> {
+        return this.count$.pipe(take(1), map(countValue => (countValue >= 5) ? true : false));
     }
 
 }
