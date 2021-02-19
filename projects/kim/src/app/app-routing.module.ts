@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'auth-counter',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./counter-auth/counter-auth.module').then(m => m.CounterAuthModule)
   }
 ];
 
