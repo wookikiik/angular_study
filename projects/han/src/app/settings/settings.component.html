@@ -1,4 +1,8 @@
-<div>
-    <p>기온 단위 변환</p>: 토글버튼
-</div>
 <p><a routerLink='/weather'>돌아가기</a></p>
+<div class="tempUnit_container">
+    <p>기온 단위 :</p>
+    <mat-button-toggle-group (change)="toggleTempUnit()" [value]="tempUnit$ | async">
+        <mat-button-toggle [value]="tempUnit.celcius">{{tempUnit.celcius}}</mat-button-toggle>
+        <mat-button-toggle [value]="tempUnit.fahrenheit">{{tempUnit.fahrenheit}}</mat-button-toggle>
+    </mat-button-toggle-group>
+</div>
