@@ -6,10 +6,9 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './auth.component.html'
 })
 export class AuthComponent implements OnInit {
-  excuteValue: number;
-  constructor(
-    private route: ActivatedRoute,
-  ) { }
+  private excuteValue: number;
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => this.excuteValue = data.excuteValue);
