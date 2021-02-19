@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { take, takeLast } from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { of } from 'rxjs';
+import { catchError, skip, take } from 'rxjs/operators';
 import { City, TextInputOptions } from '../core/models';
 import { CityService } from '../core/services/city.service';
 
@@ -9,10 +9,9 @@ import { CityService } from '../core/services/city.service';
   templateUrl: './city.component.html',
   styleUrls: ['./city.component.css']
 })
-export class CityComponent implements OnInit, OnDestroy {
+export class CityComponent {
 
   city: City;
-  subscription: Subscription;
   isSubmitting = false;
   title = '도시 검색 페이지';
   textInputOptions: TextInputOptions = {
@@ -24,28 +23,20 @@ export class CityComponent implements OnInit, OnDestroy {
 
   constructor(private cityService: CityService) { }
 
-  ngOnInit(): void {
-    console.log('onInit');
-    // this.subscription = this.cityService.getCurrentCity().subscribe(city => {
-    //   console.log('received city', city);
-    //   this.city = city;
-    //   this.isSubmitting = true;
-    // });
-  }
-
-  ngOnDestroy(): void {
-    // this.subscription.unsubscribe();
-  }
-
   searchCity(cityName: string): void {
     if (cityName.trim().length === 0) {
       alert('도시를 입력하세요');
       return;
     }
 
-    // this.cityService.fetchCityByName(cityName).pipe(distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b))).subscribe(city=>console.log('fetch city', city));
-    this.cityService.fetchCityByName(cityName).pipe(take(2),takeLast(1)).subscribe(city => {
-      console.log('received city', city);
+    this.cityService.fetchCityByName(cityName).pipe(
+      skip(1),
+      take(1),
+      catchError((err) => {
+        this.isSubmitting = false;
+        return of({ title: '', woeid: 0 } as City).pipe(take(1));
+      })
+    ).subscribe(city => {
       this.city = city;
       this.isSubmitting = true;
     });
