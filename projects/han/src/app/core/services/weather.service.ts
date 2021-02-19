@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ApiConstants } from '../../shared/constants';
 import { WeatherCondition } from '../enums';
 import { Weather } from '../models';
@@ -9,7 +9,7 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class WeatherService {
-  private weatherSubject: BehaviorSubject<Weather> = new BehaviorSubject<Weather>(null);
+  private weatherSubject: Subject<Weather> = new Subject<Weather>();
   private weather$: Observable<Weather> = this.weatherSubject.asObservable();
 
   constructor(private apiService: ApiService) { }
@@ -20,10 +20,6 @@ export class WeatherService {
       .subscribe(weather => {
         this.weatherSubject.next(this.fromJsonToWeather(weather));
       });
-    return this.weather$;
-  }
-
-  public getCurrentWeather(): Observable<Weather> {
     return this.weather$;
   }
 
