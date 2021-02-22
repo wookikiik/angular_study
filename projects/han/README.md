@@ -203,10 +203,7 @@
 ## Command
 - 가상 API 서버
 ```
-- 설치
-angular_study> npm install json-server --save-dev
-
-- 서버 실행
+- json server 실행
 angular_study> json-server --watch ./mock-api/db.json --routes ./mock-api/routes.json
 ```
 
