@@ -30,8 +30,7 @@ export class CityComponent {
     }
 
     this.cityService.fetchCityByName(cityName).pipe(
-      skip(1),
-      take(1),
+      skip(1), take(1),
       catchError((err) => {
         this.isSubmitting = false;
         return of({ title: '', woeid: 0 } as City).pipe(take(1));
