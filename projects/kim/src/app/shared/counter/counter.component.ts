@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CounterService } from '../../core';
+import { CounterSign } from '../../core/enums/countersign';
 
 @Component({
   selector: 'app-count',
@@ -15,7 +16,11 @@ export class CounterComponent implements OnInit {
     this.count$ = this.counterService.count$;
   }
 
-  clickCount(triggrSign?: string): void {
-    this.counterService.excuteCounter(triggrSign);
+  clickMinusCount(): void {
+    this.counterService.excuteCounter(CounterSign.Minus);
+  }
+
+  clickPlusCount(): void {
+    this.counterService.excuteCounter(CounterSign.Plus);
   }
 }
