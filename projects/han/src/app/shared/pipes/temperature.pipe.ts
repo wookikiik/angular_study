@@ -20,9 +20,10 @@ export class TemperaturePipe implements PipeTransform {
     }
 
     convertTemp(temperatureValue: number, convertToUnit: TemperatureUnit): number {
-
-        return convertToUnit === TemperatureUnit.celcius ?
-            temperatureValue /*(temperatureValue * 9 / 5) + 32*/ : (temperatureValue - 32) * 5 / 9;
+        if (convertToUnit === TemperatureUnit.fahrenheit) {
+            temperatureValue = (temperatureValue - 32) * 5 / 9;
+        }
+        return Math.round(temperatureValue * 10) / 10;
     }
 
 }
