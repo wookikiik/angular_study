@@ -15,7 +15,6 @@
 
 - 메인 페이지 ( /main )
   - 사이트 메인 페이지.
-  - 도시 검색을 하지 않았을 때 전시되는 페이지.
   - 도시 조회 페이지로 이동하는 버튼 전시.
     
 - 도시 조회 페이지 ( /city/search )
@@ -27,12 +26,12 @@
 - 도시 별 날씨 페이지( /weather )
 
   - 세팅 버튼 (세팅 페이지 연결)
-  - 존재하지 않는 도시를 검색한 뒤 도시 별 날씨 페이지로 이동 시 메인 페이지(/main)로 이동.
-  - 도시 이름, 검색 시간, 날씨 상태 이미지/텍스트, 평균, 최저, 최고 온도 (섭씨, 화씨 지원)
+  - 검색하지 않고 임의로 도시 별 날씨 페이지로 이동 시 메인 페이지(/main)로 redirect.
+  - 검색 시간, 날씨 상태 이미지/텍스트, 평균, 최저, 최고 온도 (섭씨, 화씨 지원)
 
 - 세팅 페이지 ( /settings )
-  - 기온 단위 변환 토글 버튼 : 클릭하여 전시되는 기온의 단위(섭씨, 화씨)를 설정.
   - 돌아가기 버튼 (도시 별 날씨 페이지)
+  - 온도 단위 변환 토글 버튼 : 클릭하여 도시 별 날씨페이지에 전시되는 온도의 단위(섭씨, 화씨)를 설정.
 
 ## Backend
 
@@ -155,8 +154,11 @@
     /models
       - weather.model.ts : 날씨 정보 저장 모델
       - city.model.ts : 도시 정보 저장 모델
+      /inputoptions : input 컴포넌트의 attribute option 인터페이스
+        - textinput.options.ts : text input 태그의 attribute option 인터페이스
     /enums
       - weathercondition.enum.ts : 날씨 상태 별 텍스트 Enum
+      - temperatureunit.enum.ts : 온도 단위 Enum
   
   /main : 메인 페이지
     - main.component.ts : 메인 페이지 컴포넌트
@@ -176,8 +178,6 @@
     - city.component.ts : 도시 검색 페이지 컴포넌트
     - city.module.ts : 검색 페이지 모듈
     - city-routing.module.ts : 검색 페이지 라우팅 모듈
-    /search
-      - search.component.ts : 도시 검색 컴포넌트
 
   /settings
     - settings.component.ts : 세팅 페이지 컴포넌트
@@ -186,9 +186,28 @@
     
   /shared
     - shared.module.ts : 공통 공유 모듈
+    - material.module.ts : angular material 모듈
+    - constants : global static constant
     /layout
       /header
         - header.component.ts : 공통 헤더 컴포넌트
+    /components
+      /search
+        - search.component.ts : search Box와 button 컴포넌트
     /pipes
       - temperature.pipe.ts : 온도 단위를 변환하여 전시하기 위한 온도 파이프
+    /directives
+      - weather-condition.directive.ts : weather condition에 따라 background image를 전시하는 directive
+```
+
+## Command
+- 가상 API 서버
+```
+- json server 실행
+angular_study> json-server --watch ./mock-api/db.json --routes ./mock-api/routes.json
+```
+
+- han 프로젝트 실행
+```
+angular_study> npm run start:han
 ```

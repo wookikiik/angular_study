@@ -8,7 +8,7 @@
       "schematics": {},
       "root": "projects/han",
       "sourceRoot": "projects/han/src",
-      "prefix": "app",
+      "prefix": "",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -24,6 +24,7 @@
               "projects/han/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/han/src/styles.css"
             ],
             "scripts": []
@@ -87,6 +88,7 @@
               "projects/han/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/han/src/styles.css"
             ],
             "scripts": []

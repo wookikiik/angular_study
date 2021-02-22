@@ -17,7 +17,7 @@ export class WeatherGuard implements CanActivate {
         return this.cityService.getCurrentCity().pipe(
             take(1),
             map(city => {
-                return city != null ? true : this.router.createUrlTree(['/']);
+                return (city.woeid !== undefined && city.woeid !== 0) ? true : this.router.createUrlTree(['/']);
             })
         );
     }
