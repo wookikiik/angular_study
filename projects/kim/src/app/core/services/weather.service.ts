@@ -24,9 +24,9 @@ export class WeatherService {
     this.weatherSubject.next({
       condition: WeatherCondition.snow,
       formattedCondition: 'Showers',
-      minTemp: 10,
-      maxTemp: 20,
-      Temp: 15,
+      minTemp: 10.1,
+      maxTemp: 20.2,
+      Temp: 15.3,
       updateDate: new Date(),
       location: 'Seoul',
     });

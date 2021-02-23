@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from '../core/services';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private settingsService: SettingsService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  clickTempToggle(): void {
+    this.settingsService.conversionTempToggle();
   }
-
 }
