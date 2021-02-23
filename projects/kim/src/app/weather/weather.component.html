@@ -1,6 +1,7 @@
 <app-city-search></app-city-search>
 
 <div *ngIf="(weather$ | async) as weather">
+    <p>{{ weather.location }}</p>
     <p>{{ weather.formattedCondition }}</p>
     <p>{{ weather.Temp | temperature }}</p>
     <p>min: {{ weather.minTemp | temperature }}</p>
