@@ -1,0 +1,17 @@
+<h1>{{title}}</h1>
+<app-search (search)="searchCity($event)" [textInputOptions]="textInputOptions">
+</app-search>
+
+<div *ngIf="isSubmitting && city != null" class="result">
+    <h2>도시 검색 결과</h2>
+    <div>
+        <ul *ngIf="city.title  else nothing">
+            <li>
+                <a routerLink='/weather'>{{ city.title }}</a>
+            </li>
+        </ul>
+        <ng-template #nothing>
+            <h3 class="nothing">해당하는 도시가 없습니다.</h3>
+        </ng-template>
+    </div>
+</div>

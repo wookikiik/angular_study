@@ -1,0 +1,5 @@
+<div class="container">
+    <input [formControl]="searchText" type="text" placeholder="{{ textInputOptions.placeholderText }}"
+        [style.width.px]="textInputOptions.width" [style.height.px]="textInputOptions.height" class="searchBox">
+    <button (click)="submit()" class="searchBtn">검색</button>
+</div>
