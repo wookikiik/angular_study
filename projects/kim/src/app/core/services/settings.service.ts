@@ -9,9 +9,7 @@ export class SettingsService {
     temperatureUnit = TemperatureUnit.celcius;
     constructor() { }
 
-    conversionTempToggle(): void {
-        // Test
-        this.temperatureUnit = this.temperatureUnit === TemperatureUnit.celcius ?
-            TemperatureUnit.fahrenheit : TemperatureUnit.celcius;
+    conversionTempToggle(temperatureUnit: TemperatureUnit): void {
+        this.temperatureUnit = temperatureUnit;
     }
 }

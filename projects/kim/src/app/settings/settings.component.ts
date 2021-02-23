@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TemperatureUnit } from '../core/enums/temperature.unit';
 import { SettingsService } from '../core/services';
 
 @Component({
@@ -12,7 +13,11 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  clickTempToggle(): void {
-    this.settingsService.conversionTempToggle();
+  clickCelciusToggle(): void {
+    this.settingsService.conversionTempToggle(TemperatureUnit.celcius);
+  }
+
+  clickFahrenheitToggle(): void {
+    this.settingsService.conversionTempToggle(TemperatureUnit.fahrenheit);
   }
 }
