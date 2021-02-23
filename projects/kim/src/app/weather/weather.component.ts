@@ -9,7 +9,6 @@ import { CityService, WeatherService } from '../core/services';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
-
   weather$: Observable<Weather>;
 
   constructor(

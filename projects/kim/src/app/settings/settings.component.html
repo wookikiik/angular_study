@@ -1,2 +1,7 @@
-<app-unit-toggle></app-unit-toggle>
-<button routerLink="/weather">back</button>
+<div><button routerLink="/weather" mat-stroked-button>back</button></div>
+<div>
+    <mat-button-toggle-group>
+        <mat-button-toggle (click)="clickCelciusToggle()">Celcius</mat-button-toggle>
+        <mat-button-toggle (click)="clickFahrenheitToggle()">Fahrenheit</mat-button-toggle>
+    </mat-button-toggle-group>
+</div>
