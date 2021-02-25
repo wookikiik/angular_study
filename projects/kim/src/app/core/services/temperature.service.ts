@@ -4,12 +4,13 @@ import { TemperatureUnit } from '../enums/temperature.unit';
 @Injectable({
     providedIn: 'root'
 })
-export class SettingsService {
-
+export class TemperatureService {
     temperatureUnit = TemperatureUnit.celcius;
+
     constructor() { }
 
-    conversionTempToggle(temperatureUnit: TemperatureUnit): void {
-        this.temperatureUnit = temperatureUnit;
+    convertTemperatureUnit(): void {
+        this.temperatureUnit = this.temperatureUnit === TemperatureUnit.celcius ?
+            TemperatureUnit.fahrenheit : TemperatureUnit.celcius;
     }
 }

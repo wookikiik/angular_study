@@ -10,11 +10,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getLocationId(cityName: string): Observable<any> {
-    return this.http.get(`${environment.api_url}/api/location/search?query=${cityName}`);
-  }
-
-  getWeahterData(locationId: number): Observable<any> {
-    return this.http.get(`${environment.api_url}/api/location/${locationId}`);
+  get(path: string, param: any): Observable<any> {
+    return this.http.get(`${environment.api_url}${path}${param}`);
   }
 }

@@ -2,15 +2,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
-import { CitySearchComponent, UnitToggleComponent } from './components';
+import { CitySearchComponent } from './components';
 import { TemperaturePipe } from './pipes/temperaturePipe';
 
 @NgModule({
   declarations: [
     CitySearchComponent,
-    UnitToggleComponent,
     TemperaturePipe
   ],
   imports: [
@@ -18,13 +17,12 @@ import { TemperaturePipe } from './pipes/temperaturePipe';
     RouterModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatButtonToggleModule,
+    MatSlideToggleModule
   ],
   exports: [
     CitySearchComponent,
-    UnitToggleComponent,
     MatButtonModule,
-    MatButtonToggleModule,
+    MatSlideToggleModule,
     TemperaturePipe,
     RouterModule
   ]

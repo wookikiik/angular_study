@@ -3,9 +3,9 @@
 <div *ngIf="(weather$ | async) as weather">
     <p>{{ weather.location }}</p>
     <p>{{ weather.formattedCondition }}</p>
-    <p>{{ weather.Temp | temperature }}</p>
-    <p>min: {{ weather.minTemp | temperature }}</p>
-    <p>max: {{ weather.maxTemp | temperature }}</p>
+    <p>{{ weather.Temp | temperature }}{{temperatureUnit}}</p>
+    <p>min: {{ weather.minTemp | temperature }}{{temperatureUnit}}</p>
+    <p>max: {{ weather.maxTemp | temperature }}{{temperatureUnit}}</p>
     <p>Updated: {{ weather.updateDate | date: 'h:mm a' }}</p>
 </div>
 
