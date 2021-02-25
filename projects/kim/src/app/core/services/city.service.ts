@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { City } from '../models';
 import { ApiService } from './api.service';
 
@@ -12,20 +11,20 @@ export class CityService {
   citySubject: BehaviorSubject<City> = new BehaviorSubject<City>(null);
   city$: Observable<City> = this.citySubject.asObservable();
 
-  constructor(
-    private apiService: ApiService,
-  ) { }
+  constructor(private apiService: ApiService) { }
 
   searchCity(cityName: string): void {
-    this.apiService.getLocationId(cityName)
-      .pipe(map(json => {
-        const cityJson = json[0];
-        return {
-          title: cityJson.title,
-          woeid: cityJson.woeid
-        };
-      }))
-      .subscribe(city => this.citySubject.next(city));
+    if (cityName) {
+      this.apiService.get('/api/location/search?query=', cityName)
+        .subscribe(JsonArray => this.citySubject.next(this.convertCityJson(JsonArray)));
+    }
   }
 
+  convertCityJson(cityJsonArray: { [key: string]: any }): City {
+    const cityArray = cityJsonArray[0];
+    return {
+      title: cityArray.title,
+      woeid: cityArray.woeid
+    };
+  }
 }

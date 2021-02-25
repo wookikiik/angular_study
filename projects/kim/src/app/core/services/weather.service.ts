@@ -14,20 +14,22 @@ export class WeatherService {
 
   constructor(private apiService: ApiService) { }
 
-  setWeatherData(locationId: number): void {
-    this.apiService.getWeahterData(locationId)
-      .subscribe(json => {
-        const weahterJson = json.consolidated_weather[0];
-        this.weatherSubject.next({
-          condition: this.mapStringToWeatherCondition(weahterJson.weather_state_abbr),
-          formattedCondition: weahterJson.weather_state_name,
-          minTemp: weahterJson.min_temp,
-          maxTemp: weahterJson.max_temp,
-          Temp: weahterJson.the_temp,
-          updateDate: new Date(),
-          location: json.title,
-        });
-      });
+  fetchWeather(locationId: number): void {
+    this.apiService.get('/api/location/', locationId)
+      .subscribe(JsonArray => { this.weatherSubject.next(this.convertWeatherJson(JsonArray)); });
+  }
+
+  convertWeatherJson(weatherJsonArray: { [key: string]: any }): Weather {
+    const weahterJsonArray = weatherJsonArray.consolidated_weather[0];
+    return {
+      condition: this.mapStringToWeatherCondition(weahterJsonArray.weather_state_abbr),
+      formattedCondition: weahterJsonArray.weather_state_name,
+      minTemp: weahterJsonArray.min_temp,
+      maxTemp: weahterJsonArray.max_temp,
+      Temp: weahterJsonArray.the_temp,
+      updateDate: new Date(),
+      location: weatherJsonArray.title
+    };
   }
 
   mapStringToWeatherCondition(input: string): WeatherCondition {

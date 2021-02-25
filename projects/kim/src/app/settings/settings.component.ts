@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TemperatureUnit } from '../core/enums/temperature.unit';
-import { SettingsService } from '../core/services';
+import { TemperatureUnit } from '../core/enums';
+import { TemperatureService } from '../core/services';
 
 @Component({
   selector: 'app-settings',
@@ -8,16 +8,14 @@ import { SettingsService } from '../core/services';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
+  ischecked: boolean;
+  constructor(private temperatureService: TemperatureService) { }
 
-  constructor(private settingsService: SettingsService) { }
-
-  ngOnInit(): void { }
-
-  clickCelciusToggle(): void {
-    this.settingsService.conversionTempToggle(TemperatureUnit.celcius);
+  ngOnInit(): void {
+    this.ischecked = this.temperatureService.temperatureUnit === TemperatureUnit.fahrenheit;
   }
 
-  clickFahrenheitToggle(): void {
-    this.settingsService.conversionTempToggle(TemperatureUnit.fahrenheit);
+  clickTemperatureUnitToggle(): void {
+    this.temperatureService.convertTemperatureUnit();
   }
 }
